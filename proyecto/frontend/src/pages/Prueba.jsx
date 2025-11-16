@@ -9,7 +9,7 @@ function Prueba() {
         const res = await fetch("http://localhost:8080/api/prueba", {
           method: "GET",
         });
-        const texto = await res.text(); // porque tu backend devuelve un String
+        const texto = await res.text();
         setMensaje(texto);
       } catch (err) {
         console.error(err);
@@ -20,7 +20,7 @@ function Prueba() {
   }, []);
 
   return (
-    <h1 style={{ color: "blue" }}>{mensaje}</h1>
+    <h1 style={{ color: "white" }}>{mensaje}</h1>
   );
 }
 
