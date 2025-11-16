@@ -7,7 +7,7 @@ import Prueba from "./pages/Prueba"
 
 function App() {
   return (
-  <BrowserRouter>
+  <BrowserRouter>    
     <Routes>
       <Route path="/Prueba" element={<Prueba />}/>
     </Routes>
