@@ -1,21 +1,14 @@
-import Navbar from "./components/Navbar";
-import Header from "./components/Header";
-import Imagen_inicio from "./components/InicioImagen";
-import LoginSignUp from "./components/LoginSingUp/LoginSignUp";
+import Inicio from "./pages/Inicio"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 function App() {
   return (
-    <>
-      <Header />
-      <Navbar />
-      <Imagen_inicio />
-
-      
-      <div className="flex justify-center items-center mt-10">
-        <LoginSignUp />
-      </div>
-    </>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Inicio />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
