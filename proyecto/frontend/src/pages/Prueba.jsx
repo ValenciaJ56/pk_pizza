@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
+import {Link} from "react-router-dom"
 
 function Prueba() {
   const [mensaje, setMensaje] = useState("");
@@ -20,7 +21,10 @@ function Prueba() {
   }, []);
 
   return (
-    <h1 style={{ color: "white" }}>{mensaje}</h1>
+    <div>
+      <h1 style={{ color: "white" }}>{mensaje}</h1>
+      <Link to="/Prueba">Prueba</Link>
+    </div>
   );
 }
 
