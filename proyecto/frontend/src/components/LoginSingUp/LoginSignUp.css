@@ -1,0 +1,139 @@
+.contenedor {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 40px;
+  background-color: #d9d9d9;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tex {
+  font-size: 30px;
+  font-weight: bold;
+  color: #c41e3a; 
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.underline {
+  width: 180px;
+  height: 6px;
+  background: linear-gradient(to left, #000000, #c41e3a);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  background: #f8f8f8;
+  border-radius: 10px;
+  padding: 0 15px;
+  border: 3px solid #f0f0f0;
+  transition: all 0.8s ease;
+}
+
+.input:hover {
+  border-color: #ffcccb;
+}
+
+.input:focus-within {
+  border-color: #c41e3a;
+  box-shadow: 0 0 0 2px rgba(196, 30, 58, 0.1);
+}
+
+.input img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  opacity: 0.7;
+}
+
+.input input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+}
+
+.contraolvidadada {
+  text-align: right;
+  margin-bottom: 25px;
+  font-size: 14px;
+  color: #666;
+}
+
+.contraolvidadada span {
+  color: #c41e3a;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.contraolvidadada span:hover {
+  color: #ff6b6b;
+  text-decoration: underline;
+}
+
+.submit-contenedor {
+  display: flex;
+  gap: 15px;
+}
+
+.submit {
+  flex: 1;
+  height: 50px;
+  background: linear-gradient(to right, #c41e3a, #ff6b6b);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+}
+
+.submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(196, 30, 58, 0.4);
+}
+
+.submit:active {
+  transform: translateY(1px);
+}
+
+
+
+
+
+/* Estilos responsivos esto ayudó la ia*/
+@media (max-width: 480px) {
+  .contenedor {
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  .submit-contenedor {
+    flex-direction: column;
+  }
+}

@@ -1,19 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import {BrowserRouter, Routes, Route} from "react-router-dom"
-import Prueba from "./pages/Prueba"
+import Navbar from "./components/Navbar";
+import Header from "./components/Header";
+import Imagen_inicio from "./components/InicioImagen";
+import LoginSignUp from "./components/LoginSingUp/LoginSignUp";
 
 function App() {
   return (
-  <BrowserRouter>    
-    <Routes>
-      <Route path="/" element={<Prueba />}/>
-      <Route path="/Prueba" element={<Prueba />}/>
-    </Routes>
-  </BrowserRouter>
-  )
+    <>
+      <Header />
+      <Navbar />
+      <Imagen_inicio />
+
+      
+      <div className="flex justify-center items-center mt-10">
+        <LoginSignUp />
+      </div>
+    </>
+  );
 }
 
-export default App
+export default App;
