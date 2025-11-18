@@ -5,14 +5,14 @@ public class ProductoItem {
     private int cantidad;
     private String observacion;
 
-    public ProductoItem(Producto p, int cantidad, String observacion){
-        this.producto = p;
+    public ProductoItem(Producto producto, int cantidad, String observacion){
+        this.producto = producto;
         this.cantidad = cantidad;
         this.observacion = observacion;
     }
 
-    public void setProducto (Producto p){
-        this.producto = p;
+    public void setProducto (Producto producto){
+        this.producto = producto;
     }
 
     public void setCantidad (int c){

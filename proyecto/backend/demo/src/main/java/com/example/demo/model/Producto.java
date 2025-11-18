@@ -5,6 +5,11 @@ public class Producto {
     private String nombre;
     private int precio;
 
+    public Producto(int id, String nombre, int precio){
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+    }
     public int getId(){
         return id;
     }
@@ -32,7 +37,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "{" + id + "," + nombre + "," + precio + "}";
+        return id + "," + nombre + "," + precio;
     }
 
 }

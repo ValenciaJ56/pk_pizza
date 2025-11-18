@@ -6,9 +6,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.example.demo.model.Pedido;
+import com.example.demo.model.Producto;
 import com.example.demo.model.ProductoItem;
 
 public class PedidoRepository {
@@ -40,13 +42,31 @@ public class PedidoRepository {
         String linea;
 
         while ((linea = br.readLine()) != null) {
-            String[] datos = linea.split(",");
+            String[] datos = linea.split(",", 2);
 
-            if (datos.length < 3) continue; // línea inválida
-
+            if (datos.length < 2) continue;
             Pedido pedido = new Pedido();
             pedido.setId(Integer.parseInt(datos[0]));
+
+            String resto_de_info = datos[1];
+            resto_de_info = resto_de_info.replace("[", "").replace("]", "").trim();
+
+            String[] productos = resto_de_info.split("\\},\\{");
+
             List<ProductoItem> lista = new ArrayList<>();
+
+            for (String item : productos){
+                item = item.replace("{", "").replace("}", "");
+                String[] info = item.split(",");
+
+                ProductoItem pi = new ProductoItem(
+                    new Producto(Integer.parseInt(info[0]), info[1], Integer.parseInt(info[2])),
+                    Integer.parseInt(info[3]), 
+                    info[4]);
+
+                lista.add(pi);
+            }
+
             pedido.setItems(lista);
 
             pedidos.add(pedido);
