@@ -9,7 +9,7 @@ import Footer from "./components/footer"
 import { BrowserRouter, Routes, Route} from "react-router-dom"
 import fondogrande from "./assets/fondogrande.jpg";
 import Productos from "./pages/Productos"
-
+import PedidosDashboard from "./components/PedidosDashboard"
 function App() {
   return (
     <BrowserRouter>
@@ -35,6 +35,7 @@ function App() {
                 <Route path="/Despachador" element={<Despachador />} />
                 <Route path="*" element={<Error />} />
                 <Route path="/Productos" element={<Productos />} />
+                <Route path="/pedidos" element={<PedidosDashboard />} />
               </Routes>
             </div>
           </div>
