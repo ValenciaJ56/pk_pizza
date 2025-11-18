@@ -1,3 +1,4 @@
+// ...existing code...
 import Inicio from "./pages/Inicio"
 import Chef from "./pages/Chef"
 import Despachador from "./pages/Despachador"
@@ -6,22 +7,37 @@ import Error from "./pages/Error"
 import Navbar from "./components/Navbar"
 import Footer from "./components/footer"
 import { BrowserRouter, Routes, Route} from "react-router-dom"
+import fondogrande from "./assets/fondogrande.jpg";
 
 function App() {
   return (
     <BrowserRouter>
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <div style={{ flex: 1 }}>
-          <Routes>
-            <Route path="/" element={<Inicio />} />
-            <Route path="/Chef" element={<Chef />} />
-            <Route path="/Despachador" element={<Despachador />} />
-
-            <Route path="*" element={<Error />} />
-
-            <Route path="/Prueba" element={<Navbar />} /> 
-          </Routes>
+      <div
+        style={{
+          backgroundImage: `url(${fondogrande})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        {/* Capa semitransparente para mejorar contraste del contenido */}
+        <div style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.45)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+            <div style={{ flex: 1 }}>
+              <Routes>
+                <Route path="/" element={<Inicio />} />
+                <Route path="/Chef" element={<Chef />} />
+                <Route path="/Despachador" element={<Despachador />} />
+                <Route path="*" element={<Error />} />
+                <Route path="/Prueba" element={<Navbar />} />
+              </Routes>
+            </div>
+          </div>
         </div>
+
         <Footer />
       </div>
     </BrowserRouter>
