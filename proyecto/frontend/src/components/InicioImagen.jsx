@@ -1,7 +1,7 @@
 const Imagen_inicio = () => {
   return (
-    <div className="contenedor-imagen">
-      <h1>hola</h1>
+    <div className="contenedor-imagen w-full h-96 bg-gray-300 flex justify-center items-center">
+      <a href=""></a>
     </div>
   )
 }
