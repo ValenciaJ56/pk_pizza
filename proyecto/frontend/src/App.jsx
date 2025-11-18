@@ -4,20 +4,26 @@ import Despachador from "./pages/Despachador"
 import Error from "./pages/Error"
 
 import Navbar from "./components/Navbar"
+import Footer from "./components/footer"
 import { BrowserRouter, Routes, Route} from "react-router-dom"
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Inicio />} />
-        <Route path="/Chef" element={<Chef />} />
-        <Route path="/Despachador" element={<Despachador />} />
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <div style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Inicio />} />
+            <Route path="/Chef" element={<Chef />} />
+            <Route path="/Despachador" element={<Despachador />} />
 
-        <Route path="*" element={<Error />} />
+            <Route path="*" element={<Error />} />
 
-        <Route path="/Prueba" element={<Navbar />} /> 
-      </Routes>
+            <Route path="/Prueba" element={<Navbar />} /> 
+          </Routes>
+        </div>
+        <Footer />
+      </div>
     </BrowserRouter>
   )
 }
