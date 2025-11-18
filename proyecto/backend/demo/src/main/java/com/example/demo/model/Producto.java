@@ -28,4 +28,11 @@ public class Producto {
     public void setPrecio(int precio){
         this.precio = precio;
     }
+
+
+    @Override
+    public String toString() {
+        return "{" + id + "," + nombre + "," + precio + "}";
+    }
+
 }
