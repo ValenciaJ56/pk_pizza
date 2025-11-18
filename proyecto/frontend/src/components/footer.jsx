@@ -105,4 +105,4 @@ const copyrightStyle = {
   marginTop: 16,
   textAlign: 'center'
 };
-export default Footer;export default Footer   ;
+export default Footer   ;
