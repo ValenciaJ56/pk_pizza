@@ -32,8 +32,8 @@ const Footer = () => {
         </div>
 
         <div style={rightStyle}>
-          <a href="#" aria-label="Instagram" style={iconLink}><InstagramIcon size={22} /></a>
-          <a href="#" aria-label="WhatsApp" style={iconLink}><WhatsAppIcon size={22} /></a>
+          <a href="https://www.instagram.com/pk.pizza_" target='_blank' aria-label="Instagram" style={iconLink}><InstagramIcon size={22} /></a>
+          <a href="https://api.whatsapp.com/message/3LXPGRMBMXTIO1" target='_blank' aria-label="WhatsApp" style={iconLink}><WhatsAppIcon size={22} /></a>
           <a href="tel:+573000000000" aria-label="Teléfono" style={iconLink}><PhoneIcon size={20} /></a>
         </div>
       </div>
