@@ -8,6 +8,7 @@ function Inicio() {
     <>
       <Header />
       <Navbar />
+      
       <Imagen_inicio />
       
       <div className="flex justify-center items-center mt-10">

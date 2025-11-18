@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar"
 import Footer from "./components/footer"
 import { BrowserRouter, Routes, Route} from "react-router-dom"
 import fondogrande from "./assets/fondogrande.jpg";
+import Productos from "./pages/Productos"
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
                 <Route path="/Chef" element={<Chef />} />
                 <Route path="/Despachador" element={<Despachador />} />
                 <Route path="*" element={<Error />} />
-                <Route path="/Prueba" element={<Navbar />} />
+                <Route path="/Productos" element={<Productos />} />
               </Routes>
             </div>
           </div>

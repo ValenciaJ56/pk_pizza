@@ -1,4 +1,5 @@
 import React from 'react';
+import fondogrande from "../assets/fondogrande.jpg";
 
 const Imagen_inicio = () => {
   return (
