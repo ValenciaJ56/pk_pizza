@@ -8,7 +8,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Inicio />} />
-        <Route path="/Chef" element={<Inicio />} />
         <Route path="/Despachador" element={<Inicio />} />
         <Route path="/Prueba" element={<Navbar />} />
         <Route path="/Chef" element={<PizzeriaPanel />} />

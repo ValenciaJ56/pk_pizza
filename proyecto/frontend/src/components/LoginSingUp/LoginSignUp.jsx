@@ -1,6 +1,17 @@
 import './LoginSignUp.css'
+import { useNavigate } from "react-router-dom";
 
 const LoginSignUp = () => {
+  const navegar = useNavigate();
+
+  const irAChef = () => {
+    navegar("/Chef");
+  }
+
+  const irADespachador = () => {
+    navegar("/Despachador")
+  }
+
   return (
     <div className='contenedor'>
 
@@ -9,8 +20,8 @@ const LoginSignUp = () => {
             <div className="underline"></div>
         </div>
         <div className="submit-contenedor">
-            <div className="submit">Chef</div>
-            <div className="submit">Despachador</div>
+            <div className="submit" onClick={irAChef}>Chef</div>
+            <div className="submit" onClick={irADespachador}>Despachador</div>
 
         </div>
       
