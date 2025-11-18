@@ -31,15 +31,15 @@ const Footer = () => {
           <p style={infoItem}><strong>Correo:</strong> <a href="mailto:hola@ejemplo.com" style={linkStyle}>hola@ejemplo.com</a></p>
         </div>
 
+        <div style={copyrightStyle}>
+          <p style={{ margin: 0, fontSize: 13 }}>&copy; {new Date().getFullYear()}</p>
+        </div>
+
         <div style={rightStyle}>
           <a href="https://www.instagram.com/pk.pizza_" target='_blank' aria-label="Instagram" style={iconLink}><InstagramIcon size={22} /></a>
           <a href="https://api.whatsapp.com/message/3LXPGRMBMXTIO1" target='_blank' aria-label="WhatsApp" style={iconLink}><WhatsAppIcon size={22} /></a>
           <a href="tel:+573000000000" aria-label="Teléfono" style={iconLink}><PhoneIcon size={20} /></a>
         </div>
-      </div>
-
-      <div style={copyrightStyle}>
-        <p style={{ margin: 0, fontSize: 13 }}>&copy; {new Date().getFullYear()} Chupenlo.</p>
       </div>
     </footer>
   );
@@ -48,7 +48,7 @@ const Footer = () => {
 const footerStyle = {
   backgroundColor: '#333',
   color: '#fff',
-  padding: '40px 0',       // más alto
+  padding: '5px 0',       // más alto
   textAlign: 'left',
   marginTop: 'auto',
   width: '100%',
@@ -103,6 +103,6 @@ const iconLink = {
 
 const copyrightStyle = {
   marginTop: 16,
-  textAlign: 'center'
-};
+  textAlign: 'center',
+  };
 export default Footer   ;
