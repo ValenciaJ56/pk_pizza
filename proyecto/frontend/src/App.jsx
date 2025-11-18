@@ -1,4 +1,5 @@
 import Inicio from "./pages/Inicio"
+import Chef from "./pages/Chef"
 import Navbar from "./components/Navbar"
 import { BrowserRouter, Routes, Route} from "react-router-dom"
 
@@ -7,7 +8,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Inicio />} />
-        <Route path="/Chef" element={<Inicio />} />
+        <Route path="/Chef" element={<Chef />} />
         <Route path="/Despachador" element={<Inicio />} />
         <Route path="/Prueba" element={<Navbar />} /> 
       </Routes>
