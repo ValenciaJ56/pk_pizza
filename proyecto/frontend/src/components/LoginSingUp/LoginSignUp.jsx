@@ -22,7 +22,6 @@ const LoginSignUp = () => {
         <div className="submit-contenedor">
             <div className="submit" onClick={irAChef}>Chef</div>
             <div className="submit" onClick={irADespachador}>Despachador</div>
-
         </div>
       
     </div>

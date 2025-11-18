@@ -11,7 +11,7 @@ const Imagen_inicio = () => {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
       <div className="relative z-10 text-center text-white px-4">
-        <h1 className="text-5xl font-bold mb-2">Bienvenido a PK Pizza</h1>
+        <h1 className="text-5xl font-bold mb-2">Bienvenidos a PK Pizza</h1>
         <p className="text-lg">¡Una travesía pecosa!</p>
       </div>
     </div>
