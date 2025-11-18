@@ -10,6 +10,12 @@ public class Producto {
         this.nombre = nombre;
         this.precio = precio;
     }
+
+    public Producto(){
+        this.id = 0;
+        this.nombre = "";
+        this.precio = 0;
+    }
     public int getId(){
         return id;
     }

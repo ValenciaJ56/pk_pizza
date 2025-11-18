@@ -26,9 +26,9 @@ const Footer = () => {
     <footer style={footerStyle}>
       <div style={containerStyle}>
         <div style={leftStyle}>
-          <p style={infoItem}><strong>Teléfono:</strong> <a href="tel:+57 333 2499 222" style={linkStyle}>+57 333 2499 222</a></p>
-          <p style={infoItem}><strong>Dirección:</strong> San Antonio de Pereira,Mall la chulada</p>
-          <p style={infoItem}><strong>Correo:</strong> <a href="mailto:hola@ejemplo.com" style={linkStyle}>hola@ejemplo.com</a></p>
+          <p style={infoItem}><strong>Teléfono: </strong> <a href="tel:+573332499222" style={linkStyle}>+57 333 2499 222</a></p>
+          <p style={infoItem}><strong>Dirección: </strong> <a href='https://maps.app.goo.gl/eeVhw4zziNykm64B6' target='_blank'>San Antonio de Pereira, Mall La Chulada</a></p>
+          <p style={infoItem}><strong>Correo: </strong> <a href="mailto:hola@ejemplo.com" style={linkStyle}>hola@ejemplo.com</a></p>
         </div>
 
         <div style={copyrightStyle}>
