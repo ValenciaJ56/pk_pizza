@@ -8,7 +8,7 @@ function Inicio() {
     <>
       <Header />
       <Navbar />
-      <Imagen_inicio /> 
+      <Imagen_inicio />
       
       <div className="flex justify-center items-center mt-10">
         <LoginSignUp />
