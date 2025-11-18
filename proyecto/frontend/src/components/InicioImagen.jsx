@@ -1,4 +1,4 @@
-import fondogrande from "../assets/fondogrande.jpg";
+/*import fondogrande from "../assets/fondogrande.jpg";
 
 const Imagen_inicio = () => {
   return (
@@ -14,8 +14,7 @@ const Imagen_inicio = () => {
         <h1 className="text-5xl font-bold mb-2">Bienvenidos a PK Pizza</h1>
         <p className="text-lg">¡Una travesía pecosa!</p>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
-export default Imagen_inicio;
+  export default Imagen_inicio;*/
