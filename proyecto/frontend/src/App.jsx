@@ -1,7 +1,10 @@
 import Inicio from "./pages/Inicio"
 import Chef from "./pages/Chef"
+import Despachador from "./pages/Despachador"
+
 import Navbar from "./components/Navbar"
 import { BrowserRouter, Routes, Route} from "react-router-dom"
+import Despachador from "./pages/Despachador"
 
 function App() {
   return (
@@ -9,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Inicio />} />
         <Route path="/Chef" element={<Chef />} />
-        <Route path="/Despachador" element={<Inicio />} />
+        <Route path="/Despachador" element={<Despachador />} />
         <Route path="/Prueba" element={<Navbar />} /> 
       </Routes>
     </BrowserRouter>
