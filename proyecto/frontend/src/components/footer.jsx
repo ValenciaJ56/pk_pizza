@@ -26,8 +26,8 @@ const Footer = () => {
     <footer style={footerStyle}>
       <div style={containerStyle}>
         <div style={leftStyle}>
-          <p style={infoItem}><strong>Teléfono:</strong> <a href="tel:+573000000000" style={linkStyle}>+57 300 000 0000</a></p>
-          <p style={infoItem}><strong>Dirección:</strong> Calle Falsa 123, Ciudad</p>
+          <p style={infoItem}><strong>Teléfono:</strong> <a href="tel:+57 333 2499 222" style={linkStyle}>+57 333 2499 222</a></p>
+          <p style={infoItem}><strong>Dirección:</strong> San Antonio de Pereira,Mall la chulada</p>
           <p style={infoItem}><strong>Correo:</strong> <a href="mailto:hola@ejemplo.com" style={linkStyle}>hola@ejemplo.com</a></p>
         </div>
 
@@ -38,7 +38,8 @@ const Footer = () => {
         <div style={rightStyle}>
           <a href="https://www.instagram.com/pk.pizza_" target='_blank' aria-label="Instagram" style={iconLink}><InstagramIcon size={22} /></a>
           <a href="https://api.whatsapp.com/message/3LXPGRMBMXTIO1" target='_blank' aria-label="WhatsApp" style={iconLink}><WhatsAppIcon size={22} /></a>
-          <a href="tel:+573000000000" aria-label="Teléfono" style={iconLink}><PhoneIcon size={20} /></a>
+          <a href="tel:+573332499222" aria-label="Teléfono" style={iconLink}> <PhoneIcon size={20} /> </a>
+
         </div>
       </div>
     </footer>
