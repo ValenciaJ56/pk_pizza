@@ -1,7 +1,11 @@
 import Inicio from "./pages/Inicio"
 import Navbar from "./components/Navbar"
+<<<<<<< Updated upstream
+import { BrowserRouter, Routes, Route} from "react-router-dom"
+=======
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import PizzeriaPanel from './pages/PizzeriaPanel'
+>>>>>>> Stashed changes
 
 function App() {
   return (
