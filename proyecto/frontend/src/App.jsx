@@ -30,11 +30,11 @@ function App() {
             <div style={{ flex: 1 }}>
               <Routes>
                 <Route path="/" element={<Inicio />} />
-                <Route path="/Menu" element={<Menu />} />
-                <Route path="/Chef" element={<Chef />} />
-                <Route path="/Despachador" element={<Despachador />} />
+                <Route path="/menu" element={<Menu />} />
+                <Route path="/chef" element={<Chef />} />
+                <Route path="/despachador" element={<Despachador />} />
                 <Route path="*" element={<Error />} />
-                <Route path="/Productos" element={<Productos />} />
+                <Route path="/productos" element={<Productos />} />
                 <Route path="/pedidos" element={<PedidosDashboard />} />
               </Routes>
             </div>
