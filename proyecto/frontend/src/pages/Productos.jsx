@@ -2,8 +2,26 @@ import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Productos() {
+  const navegar = useNavigate();
+  
+  const irADespachador = () => {
+    navegar("/despachador");
+  }
+
+  function eliminarProducto(id) {
+    fetch(`http://localhost:8080/api/productos/${id}`, 
+      { method: "DELETE" 
+      })
+      .then(() => {
+        setProductos(prev => prev.filter(p => p.id != id));
+      })
+      .catch(error => console.error("Error al eliminar el producto", error));
+  };
+  
+  
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
@@ -31,7 +49,7 @@ function Productos() {
               Agregar Producto
             </a>
 
-            <a href="/productos" className="inline-block bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md transition">
+            <a onClick={irADespachador} className="inline-block bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md transition">
               Atrás
             </a>
 
@@ -49,7 +67,7 @@ function Productos() {
 
                   <div className="flex items-center gap-4">
                     <span className="inline-block bg-[#c41e3a] text-white font-semibold px-4 py-2 rounded-full">${producto.precio}</span>
-                    <a href={`/productos/${producto.id}`} className="text-sm border border-gray-300 text-gray-900 px-3 py-1 rounded hover:bg-gray-100 transition">Eliminar</a>
+                    <a onClick={() => eliminarProducto(producto.id)} className="text-sm border border-gray-300 text-gray-900 px-3 py-1 rounded hover:bg-gray-100 transition">Eliminar</a>
                   </div>
                 </li>
               ))}
