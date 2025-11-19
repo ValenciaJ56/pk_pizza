@@ -13,7 +13,7 @@ function Productos() {
 
   function eliminarProducto(id) {
     fetch(`http://localhost:8080/api/productos/${id}`, 
-      { method: "DELETE" 
+      {method: "DELETE" 
       })
       .then(() => {
         setProductos(prev => prev.filter(p => p.id != id));
