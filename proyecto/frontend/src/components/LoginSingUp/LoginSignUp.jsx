@@ -5,11 +5,11 @@ const LoginSignUp = () => {
   const navegar = useNavigate();
 
   const irAChef = () => {
-    navegar("/Chef");
+    navegar("/chef");
   }
 
   const irADespachador = () => {
-    navegar("/Despachador");
+    navegar("/despachador");
   }
 
   return (

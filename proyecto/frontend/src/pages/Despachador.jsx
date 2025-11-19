@@ -23,7 +23,7 @@ function Despachador() {
   }, []);
 
   const irAProductos = () => {
-    navegar("/Productos");
+    navegar("/productos");
   };
 
   const handleAdd = () => {
