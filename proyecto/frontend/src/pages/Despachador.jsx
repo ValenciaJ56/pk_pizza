@@ -32,7 +32,7 @@ function Despachador() {
   const seconds = Math.floor((elapsed % 60000) / 1000);
   const pad = (n) => n.toString().padStart(2, "0");
 
-  // Muestra minutos y segundos; puedes ajustar para mostrar solo minutos si prefieres
+  // Muestra minutos y segundos transcurridos
   return (
     <div className="mt-3 text-sm text-gray-600" title={`Tiempo ${minutes}:${pad(seconds)}`}>
       Tiempo: {minutes} min {pad(seconds)}s
@@ -126,6 +126,40 @@ function Despachador() {
       items: prev.items.map(it => it.id === itemId ? { ...it, [field]: value } : it)
     }))
   }
+  const confirmarOrden = async (order) => {
+    // Serializar items al formato esperado: {"producto":{"id":...,"nombre":...,"precio":...},"cantidad":...,"observacion":...}
+    const itemsFormato = order.items.map(item => ({
+      producto: {
+        id: item.productoId,
+        nombre: item.nombre,
+        precio: item.precioUnitario
+      },
+      cantidad: item.cantidad,
+      observacion: item.observaciones || ""
+    }));
+
+    const pedidoGuardar = {
+      numero: order.number,
+      items: itemsFormato,
+      estado: "espera" // estado inicial
+    };
+    try {
+      await fetch("http://localhost:8080/api/pedidos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(pedidoGuardar)
+      });
+      
+      // Marcar localmente como confirmada después de guardar en backend
+      setOrders(prev => prev.map(o => o.id === order.id ? { ...o, confirmed: true, confirmedAt: Date.now() } : o));
+      if (activeOrderId === order.id) setActiveOrderId(null);
+    } catch (err) {
+      console.error("Error al confirmar orden en backend:", err);
+      alert("Error al confirmar la orden");
+    }
+  }
+    
+  
 
   const removeModalItem = (itemId) => {
     setModalOrder(prev => ({ ...prev, items: prev.items.filter(it => it.id !== itemId) }))
@@ -275,6 +309,13 @@ function Despachador() {
                         >
                           Modificar orden
                         </button>
+                        <button
+                            onClick={() => confirmarOrden(o)}
+                            disabled={o.confirmed}
+                            className={`text-sm font-bold px-6 py-1.5 rounded ${o.confirmed ? 'bg-gray-300 text-gray-700 cursor-default' : 'bg-green-600 text-white'}`}
+                          >
+                            {o.confirmed ? 'Orden confirmada' : 'Confirmar orden'}
+                          </button>
                       </div>
                       {/* Temporizador dentro del recuadro de la orden, debajo de los botones */}
                       <OrderTimer startedAt={o.startedAt} />

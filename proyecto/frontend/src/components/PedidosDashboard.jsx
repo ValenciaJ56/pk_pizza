@@ -315,6 +315,6 @@ const PedidosDashboard = () => {
       </div>
     </div>  
   );
-};
+};    
 
 export default PedidosDashboard;
