@@ -1,10 +1,8 @@
-// ...existing code...
 import Inicio from "./pages/Inicio"
 import Chef from "./pages/Chef"
 import Despachador from "./pages/Despachador"
 import Error from "./pages/Error"
 import Menu from "./pages/Menu"
-import Navbar from "./components/Navbar"
 import Footer from "./components/footer"
 import { BrowserRouter, Routes, Route} from "react-router-dom"
 import fondogrande from "./assets/fondogrande.jpg";
@@ -40,9 +38,8 @@ function App() {
             </div>
           </div>
         </div>
-
-        <Footer />
       </div>
+      <Footer />
     </BrowserRouter>
   )
 }

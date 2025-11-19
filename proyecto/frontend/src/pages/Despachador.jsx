@@ -16,7 +16,7 @@ function Despachador() {
 
       <div>
         <button onClick={irAProductos} style={{color: "white"}}>Ver Productos</button>
-      </div>      
+      </div> 
     </>
   );
 }
