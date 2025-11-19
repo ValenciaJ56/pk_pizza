@@ -11,6 +11,9 @@ public class ProductoItem {
         this.observacion = observacion;
     }
 
+    public ProductoItem(){}
+    
+
     public void setProducto (Producto producto){
         this.producto = producto;
     }

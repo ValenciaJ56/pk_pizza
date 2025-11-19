@@ -1,5 +1,2 @@
-16,[{1,jamon,20000,2,cambioo}],espera
-18,[{1,serrano,20000,2,sin cebolla}],preparacion
-19,[{1,queso,20000,2,cambioo}],listo
-21,[{1,mozzarella,20000,2,cambioo}],espera
-22,[{1,pizza,20000,2,cambioo}, {2,hambu,555,22,holii}],listo
+{"id":16,"items":[{"producto":{"id":1,"nombre":"jamon","precio":20000},"cantidad":2,"observacion":"cambioo"}],"estado":"listo"}
+{"id":18,"items":[{"producto":{"id":1,"nombre":"serrano","precio":20000},"cantidad":2,"observacion":"sin cebolla"}],"estado":"listo"}
