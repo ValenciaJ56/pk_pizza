@@ -40,12 +40,7 @@ function Despachador() {
   );
 };
  
-  
 
- 
- 
- 
- 
   // modal state handled below (modalOpen/modalOrder)
 
 
@@ -151,7 +146,7 @@ function Despachador() {
       });
       
       // Marcar localmente como confirmada después de guardar en backend
-      setOrders(prev => prev.map(o => o.id === order.id ? { ...o, confirmed: true, confirmedAt: Date.now() } : o));
+      setOrders(prev => prev.map(o => o.id === order.id ? { ...o, confirmed: true, confirmedAt: Date.now(), startedAt: Date.now() } : o));
       if (activeOrderId === order.id) setActiveOrderId(null);
     } catch (err) {
       console.error("Error al confirmar orden en backend:", err);
@@ -191,8 +186,7 @@ function Despachador() {
                 <button onClick={() => {
 
                   const number = orderNumber ? orderNumber : ((orders.length > 0) ? String(Math.max(...orders.map(o => Number(o.number || 0))) + 1) : '1')
-                  //const newOrder = { id: Date.now(), number, items: [] }
-                  const newOrder = { id: Date.now(), number, items: [], startedAt: Date.now() }
+                  const newOrder = { id: Date.now(), number, items: [] }
                   setOrders(prev => [...prev, newOrder])
                   setActiveOrderId(newOrder.id)
                   setOrderNumber('')
@@ -312,9 +306,11 @@ function Despachador() {
                         <button
                             onClick={() => confirmarOrden(o)}
                             disabled={o.confirmed}
+                            
                             className={`text-sm font-bold px-6 py-1.5 rounded ${o.confirmed ? 'bg-gray-300 text-gray-700 cursor-default' : 'bg-green-600 text-white'}`}
                           >
                             {o.confirmed ? 'Orden confirmada' : 'Confirmar orden'}
+                            
                           </button>
                       </div>
                       {/* Temporizador dentro del recuadro de la orden, debajo de los botones */}
