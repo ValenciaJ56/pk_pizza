@@ -1,0 +1,44 @@
+"filename", "language", "JavaScript", "Markdown", "JSON", "JavaScript JSX", "PostCSS", "Java Properties", "XML", "HTML", "Java", "Batch", "comment", "blank", "total"
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\.mvn\wrapper\maven-wrapper.properties", "Java Properties", 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\mvnw.cmd", "Batch", 0, 0, 0, 0, 0, 0, 0, 0, 0, 139, 26, 25, 190
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\pom.xml", "XML", 0, 0, 0, 0, 0, 0, 57, 0, 0, 0, 13, 7, 77
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\java\com\example\demo\DemoApplication.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 5, 14
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\java\com\example\demo\config\WebConfig.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 4, 24
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\java\com\example\demo\controller\PedidoController.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 36, 0, 4, 10, 50
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\java\com\example\demo\controller\ProductoController.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 36, 0, 4, 10, 50
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\java\com\example\demo\controller\TestController.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 6, 22
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\java\com\example\demo\model\Pedido.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 12, 45
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\java\com\example\demo\model\Producto.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 38, 0, 0, 12, 50
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\java\com\example\demo\model\ProductoItem.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 11, 44
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\java\com\example\demo\repository\PedidoRepository.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 97, 0, 0, 30, 127
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\java\com\example\demo\repository\ProductoRepository.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 85, 0, 0, 24, 109
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\java\com\example\demo\service\PedidoService.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 4, 8, 34
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\java\com\example\demo\service\ProductoService.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 25, 0, 4, 10, 39
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\main\resources\application.properties", "Java Properties", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 2
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\demo\src\test\java\com\example\demo\DemoApplicationTests.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 5, 14
+"c:\ProyectoSoftware\pk_pizza\proyecto\backend\package-lock.json", "JSON", 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\README.md", "Markdown", 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 17
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\eslint.config.js", "JavaScript", 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 30
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\index.html", "HTML", 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 1, 14
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\package-lock.json", "JSON", 0, 0, 4243, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4244
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\package.json", "JSON", 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 1, 33
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\postcss.config.cjs", "JavaScript", 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\App.jsx", "JavaScript JSX", 0, 0, 0, 45, 0, 0, 0, 0, 0, 0, 1, 2, 48
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\components\Header.jsx", "JavaScript JSX", 0, 0, 0, 38, 0, 0, 0, 0, 0, 0, 0, 4, 42
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\components\InicioImagen.jsx", "JavaScript JSX", 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 2, 15
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\components\LoginSingUp\LoginSignUp.css", "PostCSS", 0, 0, 0, 0, 116, 0, 0, 0, 0, 0, 1, 22, 139
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\components\LoginSingUp\LoginSignUp.jsx", "JavaScript JSX", 0, 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 8, 32
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\components\Navbar.jsx", "JavaScript JSX", 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 1, 4, 12
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\components\PedidosDashboard.jsx", "JavaScript JSX", 0, 0, 0, 238, 0, 0, 0, 0, 0, 0, 6, 16, 260
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\components\footer.jsx", "JavaScript JSX", 0, 0, 0, 94, 0, 0, 0, 0, 0, 0, 0, 15, 109
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\index.css", "PostCSS", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\main.jsx", "JavaScript JSX", 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 2, 11
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\pages\Chef.jsx", "JavaScript JSX", 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 9, 23
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\pages\Despachador.jsx", "JavaScript JSX", 0, 0, 0, 302, 0, 0, 0, 0, 0, 0, 10, 54, 366
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\pages\Error.jsx", "JavaScript JSX", 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 2, 10
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\pages\Inicio.jsx", "JavaScript JSX", 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 5, 22
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\pages\Menu.jsx", "JavaScript JSX", 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 0, 6, 53
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\src\pages\Productos.jsx", "JavaScript JSX", 0, 0, 0, 133, 0, 0, 0, 0, 0, 0, 5, 26, 164
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\tailwind.config.js", "JavaScript", 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 10
+"c:\ProyectoSoftware\pk_pizza\proyecto\frontend\vite.config.js", "JavaScript", 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 8
+"Total", "-", 46, 9, 4281, 989, 119, 4, 57, 13, 459, 139, 81, 377, 6574

@@ -46,6 +46,24 @@ const PedidosDashboard = () => {
     })
   }, [pedidos])
 
+  function ver(status) {
+    return pedidos
+      .filter(pedido => pedido.estado === status || status === "todos")
+      .map(pedido => (
+        <div key={pedido.id}>
+          <h1>ID: {pedido.estado}</h1>
+
+          {pedido.items.map((item, index) => (
+          <div key={index}>
+            <p>Producto: {item.producto.nombre}</p>
+            <p>Cantidad: {item.cantidad}</p>
+          </div>
+          ))}
+        </div>
+      ))
+  }
+
+
   const cardStyle = {
     backgroundColor: 'white',
     borderRadius: '12px',
@@ -229,8 +247,8 @@ const PedidosDashboard = () => {
               En Preparación ({cantidad.enPreparacion})
             </button>
             <button 
-              style={tabStyle(filtroActivo === 'listos')}
-              onClick={() => setFiltroActivo('listos')}
+              style={tabStyle(filtroActivo === 'listo')}
+              onClick={() => setFiltroActivo('listo')}
             >
               Listos ({cantidad.listos})
             </button>
@@ -249,8 +267,8 @@ const PedidosDashboard = () => {
             Mostrando pedidos: <strong>{filtroActivo === 'todos' ? 'Todos' : filtroActivo}</strong>
           </p>
           <p style={{ color: '#999', textAlign: 'center', marginTop: '16px' }}>
-            Aquí se mostrarían los detalles de los pedidos filtrados
           </p>
+          {ver(filtroActivo)}
         </div>
       </div>
     </div>  

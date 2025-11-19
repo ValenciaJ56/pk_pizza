@@ -1,5 +1,5 @@
-16,[{1,pizza,20000,2,cambioo}],espera
-18,[{1,pizza,20000,2,sin cebolla}],preparacion
-19,[{1,pizza,20000,2,cambioo}],listo
-21,[{1,pizza,20000,2,cambioo}],espera
+16,[{1,jamon,20000,2,cambioo}],espera
+18,[{1,serrano,20000,2,sin cebolla}],preparacion
+19,[{1,queso,20000,2,cambioo}],listo
+21,[{1,mozzarella,20000,2,cambioo}],espera
 22,[{1,pizza,20000,2,cambioo}, {2,hambu,555,22,holii}],listo
