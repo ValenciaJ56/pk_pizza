@@ -50,23 +50,58 @@ const PedidosDashboard = () => {
     return pedidos
       .filter(pedido => pedido.estado === status || status === "todos")
       .map(pedido => (
-        <div key={pedido.id}>
-          <h1>Pedido {pedido.id}</h1>
-          {pedido.items.map((item, index) => (
-          <div key={index}>
-            <p>Producto: {item.producto.nombre}</p>
-            <p>Cantidad: {item.cantidad}</p>
-            <p>Observación: {item.observacion}</p>
+        <div key={pedido.id} className="mb-4 p-4 bg-white rounded-lg shadow-sm">
+          <div className="flex items-start justify-between">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">Pedido #{pedido.id}</h3>
+              <p className="text-sm text-gray-600">Estado: <span className="font-medium text-gray-800">{pedido.estado}</span></p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              {botonCambiarEstado(status, pedido)}
+            </div>
           </div>
-          ))}
-        {botonCambiarEstado(status, pedido)}
+
+          <div className="mt-3 grid gap-2">
+            {pedido.items.map((item, index) => (
+              <div key={index} className="flex items-center justify-between border-t pt-2">
+                <div>
+                  <p className="text-sm text-gray-800 font-medium">{item.producto.nombre}</p>
+                  <p className="text-xs text-gray-500">{item.observacion || 'Sin observaciones'}</p>
+                </div>
+                <div className="text-sm text-gray-700">x{item.cantidad}</div>
+              </div>
+            ))}
+          </div>
         </div>
       ))
   }
 
   function botonCambiarEstado(status, pedido){
-    if (status === "espera") return <button onClick={()=> prepararPedido(pedido)}>Preparar Pedido</button>;
-    if (status === "preparacion") return <button onClick={() => finalizarPedido(pedido)}>Finalizar pedido</button>;
+    // Mostrar el botón según el estado actual del pedido (funciona también cuando el filtro es 'todos')
+    if (pedido.estado === "espera") {
+      return (
+        <button
+          onClick={() => prepararPedido(pedido)}
+          className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-3 py-2 rounded-md shadow"
+        >
+          Preparar
+        </button>
+      );
+    }
+
+    if (pedido.estado === "preparacion") {
+      return (
+        <button
+          onClick={() => finalizarPedido(pedido)}
+          className="bg-green-600 hover:bg-green-700 text-white font-semibold px-3 py-2 rounded-md shadow"
+        >
+          Finalizar
+        </button>
+      );
+    }
+
+    return null;
   }
 
   function prepararPedido(pedido){
@@ -274,25 +309,25 @@ const PedidosDashboard = () => {
               style={tabStyle(filtroActivo === 'todos')}
               onClick={() => setFiltroActivo('todos')}
             >
-              Todos ({cantidad.enEspera + cantidad.enPreparacion + cantidad.listos})
+              Todos
             </button>
             <button 
               style={tabStyle(filtroActivo === 'espera')}
               onClick={() => setFiltroActivo('espera')}
             >
-              En Espera ({cantidad.enEspera})
+              En Espera
             </button>
             <button 
               style={tabStyle(filtroActivo === 'preparacion')}
               onClick={() => setFiltroActivo('preparacion')}
             >
-              En Preparación ({cantidad.enPreparacion})
+              En Preparación
             </button>
             <button 
               style={tabStyle(filtroActivo === 'listo')}
               onClick={() => setFiltroActivo('listo')}
             >
-              Listos ({cantidad.listos})
+              Listos
             </button>
           </div>
         </div>
@@ -306,7 +341,7 @@ const PedidosDashboard = () => {
           minHeight: '300px'
         }}>
           <p style={{ color: '#666', textAlign: 'center' }}>
-            Mostrando pedidos: <strong>{filtroActivo === 'todos' ? 'Todos' : filtroActivo}</strong>
+            Pedidos: <strong>{filtroActivo === 'todos' ? 'todos' : filtroActivo}</strong>
           </p>
           <p style={{ color: '#999', textAlign: 'center', marginTop: '16px' }}>
           </p>
