@@ -127,18 +127,35 @@ function Despachador() {
     }))
   }
   const confirmarOrden = async (order) => {
-    // marca localmente como confirmada
-    setOrders(prev => prev.map(o => o.id === order.id ? { ...o, confirmed: true, confirmedAt: Date.now() } : o));
-    if (activeOrderId === order.id) setActiveOrderId(null);
-    // Si tienes un endpoint para persistir órdenes, puedes descomentar y ajustar la URL:
+    // Serializar items al formato esperado: {"producto":{"id":...,"nombre":...,"precio":...},"cantidad":...,"observacion":...}
+    const itemsFormato = order.items.map(item => ({
+      producto: {
+        id: item.productoId,
+        nombre: item.nombre,
+        precio: item.precioUnitario
+      },
+      cantidad: item.cantidad,
+      observacion: item.observaciones || ""
+    }));
+
+    const pedidoGuardar = {
+      numero: order.number,
+      items: itemsFormato,
+      estado: "espera" // estado inicial
+    };
     try {
       await fetch("http://localhost:8080/api/pedidos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...order, confirmedAt: Date.now() })
+        body: JSON.stringify(pedidoGuardar)
       });
+      
+      // Marcar localmente como confirmada después de guardar en backend
+      setOrders(prev => prev.map(o => o.id === order.id ? { ...o, confirmed: true, confirmedAt: Date.now() } : o));
+      if (activeOrderId === order.id) setActiveOrderId(null);
     } catch (err) {
       console.error("Error al confirmar orden en backend:", err);
+      alert("Error al confirmar la orden");
     }
   }
     
