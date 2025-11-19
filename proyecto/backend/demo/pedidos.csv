@@ -1,5 +1,5 @@
-16,[{1,pizza,20000,2,cambioo}], listo
-18,[{1,pizza,20000,2,sin cebolla}], listo
-19,[{1,pizza,20000,2,cambioo}], listo
-21,[{1,pizza,20000,2,cambioo}], listo
-22,[{1,pizza,20000,2,cambioo}, {2,hambu,555,22,holii}], listo
+16,[{1,pizza,20000,2,cambioo}],espera
+18,[{1,pizza,20000,2,sin cebolla}],preparacion
+19,[{1,pizza,20000,2,cambioo}],listo
+21,[{1,pizza,20000,2,cambioo}],espera
+22,[{1,pizza,20000,2,cambioo}, {2,hambu,555,22,holii}],listo

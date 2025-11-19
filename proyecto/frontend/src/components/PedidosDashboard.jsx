@@ -1,14 +1,50 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Clock, ChefHat, CheckCircle } from 'lucide-react';
 
 const PedidosDashboard = () => {
-  const [pedidos, setPedidos] = useState({
+  const [cantidad, cambiarCantidad] = useState({
     enEspera: 1,
     enPreparacion: 1,
     listos: 1
   });
 
   const [filtroActivo, setFiltroActivo] = useState('todos');
+
+  const [pedidos, setPedidos] = useState([]);
+  
+  useEffect(() => {
+    fetch("http://localhost:8080/api/pedidos", 
+      { method: "GET" 
+      })
+      .then(res => res.json())
+      .then(data => setPedidos(data))
+      .catch(error => console.error("Error al obtener productos:", error));
+  }, []);
+
+  useEffect(()=>{
+    let espera = 0
+    let listo = 0
+    let preparacion = 0
+    for (const pedido of pedidos){
+      if (pedido.estado === "espera"){
+        espera += 1;
+      }else{
+        if (pedido.estado === "listo"){
+          listo += 1;
+        }else{
+          if (pedido.estado === "preparacion"){
+            preparacion += 1;
+          }
+        }
+      }
+    }
+
+    cambiarCantidad({
+      enEspera: espera,
+      enPreparacion: preparacion,
+      listos: listo
+    })
+  }, [pedidos])
 
   const cardStyle = {
     backgroundColor: 'white',
@@ -96,7 +132,7 @@ const PedidosDashboard = () => {
               margin: 0,
               color: '#333'
             }}>
-              {pedidos.enEspera}
+              {cantidad.enEspera}
             </h2>
           </div>
 
@@ -128,7 +164,7 @@ const PedidosDashboard = () => {
               margin: 0,
               color: '#333'
             }}>
-              {pedidos.enPreparacion}
+              {cantidad.enPreparacion}
             </h2>
           </div>
 
@@ -160,7 +196,7 @@ const PedidosDashboard = () => {
               margin: 0,
               color: '#333'
             }}>
-              {pedidos.listos}
+              {cantidad.listos}
             </h2>
           </div>
         </div>
@@ -178,25 +214,25 @@ const PedidosDashboard = () => {
               style={tabStyle(filtroActivo === 'todos')}
               onClick={() => setFiltroActivo('todos')}
             >
-              Todos ({pedidos.enEspera + pedidos.enPreparacion + pedidos.listos})
+              Todos ({cantidad.enEspera + cantidad.enPreparacion + cantidad.listos})
             </button>
             <button 
               style={tabStyle(filtroActivo === 'espera')}
               onClick={() => setFiltroActivo('espera')}
             >
-              En Espera ({pedidos.enEspera})
+              En Espera ({cantidad.enEspera})
             </button>
             <button 
               style={tabStyle(filtroActivo === 'preparacion')}
               onClick={() => setFiltroActivo('preparacion')}
             >
-              En Preparación ({pedidos.enPreparacion})
+              En Preparación ({cantidad.enPreparacion})
             </button>
             <button 
               style={tabStyle(filtroActivo === 'listos')}
               onClick={() => setFiltroActivo('listos')}
             >
-              Listos ({pedidos.listos})
+              Listos ({cantidad.listos})
             </button>
           </div>
         </div>
@@ -217,7 +253,7 @@ const PedidosDashboard = () => {
           </p>
         </div>
       </div>
-    </div>
+    </div>  
   );
 };
 

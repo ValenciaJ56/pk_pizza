@@ -214,7 +214,7 @@ function Despachador() {
                   >
                     +
                   </button>
-                  <span className="text-xl text-black font-bold">Agregar al orden activa</span>
+                  <span className="text-xl text-black font-bold">Agregar a la orden activa</span>
                 </div>
               </div>
             </div>
@@ -224,7 +224,7 @@ function Despachador() {
             <h3 className="text-xl text-black font-bold mb-3">Órdenes</h3>
 
             {orders.length === 0 ? (
-              <p className="text-black font-bold ">No hay órdenes creadas.</p>
+              <p className="text-black font-bold ">No hay órdenes creadas</p>
             ) : (
               <div className="space-y-4">
                 {[...orders].slice().reverse().map(o => (
