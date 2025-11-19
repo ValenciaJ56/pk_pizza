@@ -15,7 +15,6 @@ import com.example.demo.model.ProductoItem;
 public class PedidoRepository {
     private final String archivo = "pedidos.csv";
 
-    // ----------------- CREATE -----------------
     public void guardar(Pedido pedido) throws IOException {
         FileWriter fw = new FileWriter(archivo, true);
 
@@ -27,12 +26,10 @@ public class PedidoRepository {
         fw.close();
     }
 
-    // ----------------- READ -----------------
     public List<Pedido> listar() throws IOException {
         List<Pedido> pedidos = new ArrayList<>();
         File file = new File(archivo);
 
-        // Si el archivo NO existe, devolver lista vacía
         if (!file.exists()) {
             return pedidos;
         }
@@ -75,7 +72,6 @@ public class PedidoRepository {
         return pedidos;
     }
 
-    // ----------------- UPDATE -----------------
     public void actualizar(Pedido pedidoActualizado) throws IOException {
         List<Pedido> pedidos = listar();
         FileWriter fw = new FileWriter(archivo);
@@ -97,7 +93,6 @@ public class PedidoRepository {
         fw.close();
     }
 
-    // ----------------- DELETE -----------------
     public void eliminar(int id) throws IOException {
         List<Pedido> pedidos = listar();
         FileWriter fw = new FileWriter(archivo);
@@ -114,7 +109,6 @@ public class PedidoRepository {
         fw.close();
     }
 
-    // ----------------- GENERAR ID AUTOMÁTICO -----------------
     public int generarId() throws IOException {
         List<Pedido> pedidos = listar();
         int max = 0;
@@ -124,7 +118,6 @@ public class PedidoRepository {
                 max = pedido.getId();
             }
         }
-
         return max + 1;
     }
 }

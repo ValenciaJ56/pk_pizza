@@ -7,7 +7,9 @@ function Productos() {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/productos")
+    fetch("http://localhost:8080/api/productos", 
+      { method: "GET" 
+      })
       .then(res => res.json())
       .then(data => setProductos(data))
       .catch(error => console.error("Error al obtener productos:", error));
@@ -30,16 +32,16 @@ function Productos() {
 
           {Array.isArray(productos) && productos.length > 0 ? (
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {productos.map((prod) => (
-                <li key={prod.id} className="bg-white rounded-lg p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-md hover:shadow-lg transition transform hover:-translate-y-1">
+              {productos.map((producto) => (
+                <li key={producto.id} className="bg-white rounded-lg p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-md hover:shadow-lg transition transform hover:-translate-y-1">
                   <div className="flex-1">
-                    <h2 className="text-xl font-bold text-gray-900">{prod.nombre}</h2>
-                    <p className="text-sm text-gray-600 mt-1">{prod.descripcion ? prod.descripcion : 'Deliciosa opción'}</p>
+                    <h2 className="text-xl font-bold text-gray-900">{producto.nombre}</h2>
+                    <p className="text-sm text-gray-600 mt-1">{producto.descripcion ? producto.descripcion : 'Deliciosa opción'}</p>
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <span className="inline-block bg-[#c41e3a] text-white font-semibold px-4 py-2 rounded-full">${prod.precio}</span>
-                    <a href={`/productos/${prod.id}`} className="text-sm border border-gray-300 text-gray-900 px-3 py-1 rounded hover:bg-gray-100 transition">Eliminar</a>
+                    <span className="inline-block bg-[#c41e3a] text-white font-semibold px-4 py-2 rounded-full">${producto.precio}</span>
+                    <a href={`/productos/${producto.id}`} className="text-sm border border-gray-300 text-gray-900 px-3 py-1 rounded hover:bg-gray-100 transition">Eliminar</a>
                   </div>
                 </li>
               ))}

@@ -14,7 +14,6 @@ public class ProductoRepository {
 
     private final String archivo = "productos.csv";
 
-    // ----------------- CREATE -----------------
     public void guardar(Producto producto) throws IOException {
         FileWriter fw = new FileWriter(archivo, true);
 
@@ -27,12 +26,10 @@ public class ProductoRepository {
         fw.close();
     }
 
-    // ----------------- READ -----------------
     public List<Producto> listar() throws IOException {
         List<Producto> productos = new ArrayList<>();
         File file = new File(archivo);
 
-        // Si el archivo NO existe, devolver lista vacía
         if (!file.exists()) {
             return productos;
         }
@@ -43,7 +40,7 @@ public class ProductoRepository {
         while ((linea = br.readLine()) != null) {
             String[] datos = linea.split(",");
 
-            if (datos.length < 3) continue; // línea inválida
+            if (datos.length < 3) continue;
 
             Producto p = new Producto();
             p.setId(Integer.parseInt(datos[0]));
@@ -57,7 +54,6 @@ public class ProductoRepository {
         return productos;
     }
 
-    // ----------------- UPDATE -----------------
     public void actualizar(Producto productoActualizado) throws IOException {
         List<Producto> productos = listar();
         FileWriter fw = new FileWriter(archivo);
@@ -81,7 +77,6 @@ public class ProductoRepository {
         fw.close();
     }
 
-    // ----------------- DELETE -----------------
     public void eliminar(int id) throws IOException {
         List<Producto> productos = listar();
         FileWriter fw = new FileWriter(archivo);
@@ -99,7 +94,6 @@ public class ProductoRepository {
         fw.close();
     }
 
-    // ----------------- GENERAR ID AUTOMÁTICO -----------------
     public int generarId() throws IOException {
         List<Producto> productos = listar();
         int max = 0;
@@ -109,7 +103,6 @@ public class ProductoRepository {
                 max = p.getId();
             }
         }
-
         return max + 1;
     }
 }

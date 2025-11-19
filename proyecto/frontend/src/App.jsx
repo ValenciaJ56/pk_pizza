@@ -31,9 +31,10 @@ function App() {
                 <Route path="/menu" element={<Menu />} />
                 <Route path="/chef" element={<Chef />} />
                 <Route path="/despachador" element={<Despachador />} />
-                <Route path="*" element={<Error />} />
                 <Route path="/productos" element={<Productos />} />
                 <Route path="/pedidos" element={<PedidosDashboard />} />
+
+                <Route path="*" element={<Error />} />
               </Routes>
             </div>
           </div>
