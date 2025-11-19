@@ -23,9 +23,17 @@ function Productos() {
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-4xl font-bold text-gray-900">Lista de Productos</h1>
 
+
+            <div className="contenedor-cajas flex gap-4">
             <a href="/productos" className="inline-block bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md transition">
               Agregar Producto
             </a>
+
+            <a href="/productos" className="inline-block bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md transition">
+              Atrás
+            </a>
+
+            </div>
           </div>
 
           {Array.isArray(productos) && productos.length > 0 ? (
