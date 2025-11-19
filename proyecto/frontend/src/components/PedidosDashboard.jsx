@@ -51,16 +51,58 @@ const PedidosDashboard = () => {
       .filter(pedido => pedido.estado === status || status === "todos")
       .map(pedido => (
         <div key={pedido.id}>
-          <h1>ID: {pedido.estado}</h1>
-
+          <h1>Pedido {pedido.id}</h1>
           {pedido.items.map((item, index) => (
           <div key={index}>
             <p>Producto: {item.producto.nombre}</p>
             <p>Cantidad: {item.cantidad}</p>
+            <p>Observación: {item.observacion}</p>
           </div>
           ))}
+        {botonCambiarEstado(status, pedido)}
         </div>
       ))
+  }
+
+  function botonCambiarEstado(status, pedido){
+    if (status === "espera") return <button onClick={()=> prepararPedido(pedido)}>Preparar Pedido</button>;
+    if (status === "preparacion") return <button onClick={() => finalizarPedido(pedido)}>Finalizar pedido</button>;
+  }
+
+  function prepararPedido(pedido){
+    fetch(`http://localhost:8080/api/pedidos/${pedido.id}`, {
+      method: "PUT",
+      headers: { "Content-Type" : "application/json"},
+      body: JSON.stringify({
+        estado:   "preparacion",
+        items: pedido.items
+      })
+    })
+      .then(() => {
+        setPedidos(prev =>
+          prev.map(p => (p.id === pedido.id ? {...p, estado: "preparacion"}: p))
+        );
+        cambiarCantidad(filtroActivo);
+      })
+      .catch(error => console.error("Error al cambiar el estado del pedido", error));
+  }
+
+  function finalizarPedido(pedido){
+    fetch(`http://localhost:8080/api/pedidos/${pedido.id}`, {
+      method: "PUT",
+      headers: { "Content-Type" : "application/json"},
+      body: JSON.stringify({
+        estado: "listo",
+        items: pedido.items
+      })
+      })
+      .then(() => {
+        setPedidos(prev =>
+          prev.map(p => (p.id === pedido.id ? {...p, estado: "listo"}: p))
+        );
+        cambiarCantidad(filtroActivo);
+      })
+      .catch(error => console.error("Error al cambiar el estado del pedido", error));
   }
 
 
