@@ -18,34 +18,34 @@ function Productos() {
       <Header />
       <Navbar />
 
-      <main className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 py-10">
+      <main className="min-h-screen bg-gray-100 py-10">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-4xl font-extrabold text-white">Lista de Productos</h1>
+          <div className="flex items-center justify-between mb-8">
+            <h1 className="text-4xl font-bold text-gray-900">Lista de Productos</h1>
 
-            <a href="/productos" className="inline-block bg-[#c41e3a] hover:bg-red-700 text-white font-semibold px-4 py-2 rounded shadow">
+            <a href="/productos" className="inline-block bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md transition">
               Agregar Producto
             </a>
           </div>
 
           {Array.isArray(productos) && productos.length > 0 ? (
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {productos.map((prod) => (
-                <li key={prod.id} className="bg-gray-800 rounded-lg p-4 flex flex-col md:flex-row items-center justify-between gap-4 hover:shadow-lg transform hover:-translate-y-1 transition">
+                <li key={prod.id} className="bg-white rounded-lg p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-md hover:shadow-lg transition transform hover:-translate-y-1">
                   <div className="flex-1">
-                    <h2 className="text-xl font-bold text-white">{prod.nombre}</h2>
-                    <p className="text-sm text-gray-300 mt-1">{prod.descripcion ? prod.descripcion : 'Deliciosa opción'}</p>
+                    <h2 className="text-xl font-bold text-gray-900">{prod.nombre}</h2>
+                    <p className="text-sm text-gray-600 mt-1">{prod.descripcion ? prod.descripcion : 'Deliciosa opción'}</p>
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <span className="inline-block bg-[#c41e3a] text-white font-semibold px-3 py-1 rounded-full">${prod.precio}</span>
-                    <a href={`/productos/${prod.id}`} className="text-sm border border-white text-white px-3 py-1 rounded hover:bg-white hover:text-gray-900 transition">Eliminar</a>
+                    <span className="inline-block bg-[#c41e3a] text-white font-semibold px-4 py-2 rounded-full">${prod.precio}</span>
+                    <a href={`/productos/${prod.id}`} className="text-sm border border-gray-300 text-gray-900 px-3 py-1 rounded hover:bg-gray-100 transition">Eliminar</a>
                   </div>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-white">No se pudo cargar la lista de productos.</p>
+            <p className="text-gray-600 text-center text-lg">No se pudo cargar la lista de productos.</p>
           )}
         </div>
       </main>
