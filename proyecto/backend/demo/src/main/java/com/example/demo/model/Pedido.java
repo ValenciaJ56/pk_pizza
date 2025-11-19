@@ -6,6 +6,7 @@ import java.util.List;
 public class Pedido {
     private int id;
     private List<ProductoItem> items = new ArrayList<>();
+    private String estado;
 
     public void agregarProducto(ProductoItem item) {
         items.add(item);
@@ -19,6 +20,10 @@ public class Pedido {
         this.items = items;
     }
 
+    public void setEstado(String estado){
+        this.estado = estado;
+    }
+
     public int getId(){
         return id;
     }
@@ -29,7 +34,11 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return id + ", [" + items + "]";
+        return id + ", [" + items + "], " + estado;
+    }
+
+    public String getEstado(){
+        return estado;
     }
 
 }
