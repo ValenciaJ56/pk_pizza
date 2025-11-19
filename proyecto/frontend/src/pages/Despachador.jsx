@@ -126,6 +126,23 @@ function Despachador() {
       items: prev.items.map(it => it.id === itemId ? { ...it, [field]: value } : it)
     }))
   }
+  const confirmarOrden = async (order) => {
+    // marca localmente como confirmada
+    setOrders(prev => prev.map(o => o.id === order.id ? { ...o, confirmed: true, confirmedAt: Date.now() } : o));
+    if (activeOrderId === order.id) setActiveOrderId(null);
+    // Si tienes un endpoint para persistir órdenes, puedes descomentar y ajustar la URL:
+    try {
+      await fetch("http://localhost:8080/api/pedidos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...order, confirmedAt: Date.now() })
+      });
+    } catch (err) {
+      console.error("Error al confirmar orden en backend:", err);
+    }
+  }
+    
+  
 
   const removeModalItem = (itemId) => {
     setModalOrder(prev => ({ ...prev, items: prev.items.filter(it => it.id !== itemId) }))
