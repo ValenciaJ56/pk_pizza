@@ -38,10 +38,13 @@ public class PedidoRepository {
         String linea;
 
         while ((linea = br.readLine()) != null) {
-            String[] datos = linea.split(",", 2);
-
-            if (datos.length < 2) continue;
             Pedido pedido = new Pedido();
+            String[] data = linea.split("],");
+            pedido.setEstado(data[1]);
+            
+            String[] datos = data[0].split(",", 2);
+            if (datos.length < 2) continue;
+            
             pedido.setId(Integer.parseInt(datos[0]));
 
             String resto_de_info = datos[1];

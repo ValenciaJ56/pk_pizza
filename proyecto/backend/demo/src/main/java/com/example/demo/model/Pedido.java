@@ -34,7 +34,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return id + ", [" + items + "]";
+        return id + ", [" + items + "], " + estado;
     }
 
     public String getEstado(){
