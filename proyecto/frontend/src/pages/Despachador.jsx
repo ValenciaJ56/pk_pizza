@@ -32,7 +32,7 @@ function Despachador() {
   const seconds = Math.floor((elapsed % 60000) / 1000);
   const pad = (n) => n.toString().padStart(2, "0");
 
-  // Muestra minutos y segundos; puedes ajustar para mostrar solo minutos si prefieres
+  // Muestra minutos y segundos transcurridos
   return (
     <div className="mt-3 text-sm text-gray-600" title={`Tiempo ${minutes}:${pad(seconds)}`}>
       Tiempo: {minutes} min {pad(seconds)}s
@@ -275,6 +275,13 @@ function Despachador() {
                         >
                           Modificar orden
                         </button>
+                        <button
+                            onClick={() => confirmarOrden(o)}
+                            disabled={o.confirmed}
+                            className={`text-sm font-bold px-6 py-1.5 rounded ${o.confirmed ? 'bg-gray-300 text-gray-700 cursor-default' : 'bg-green-600 text-white'}`}
+                          >
+                            {o.confirmed ? 'Orden confirmada' : 'Confirmar orden'}
+                          </button>
                       </div>
                       {/* Temporizador dentro del recuadro de la orden, debajo de los botones */}
                       <OrderTimer startedAt={o.startedAt} />
