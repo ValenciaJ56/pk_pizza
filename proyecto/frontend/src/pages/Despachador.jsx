@@ -19,7 +19,7 @@ function Despachador() {
     fetch("http://localhost:8080/api/productos")
       .then((res) => res.json())
       .then((data) => setProductos(Array.isArray(data) ? data : []))
-      .catch((err) => console.error("Error al cargar productos:", err));
+      .catch((error) => console.error("Error al cargar productos:", error));
   }, []);
 
   const irAProductos = () => {
