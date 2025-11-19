@@ -18,19 +18,37 @@ function Productos() {
       <Header />
       <Navbar />
 
-      <div>
-        <h1 className="text-5xl" style={{color: "white"}}>Chef Page</h1>
+      <main className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 py-10">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex items-center justify-between mb-6">
+            <h1 className="text-4xl font-extrabold text-white">Lista de Productos</h1>
 
-        <h2 className="text-2xl mt-5" style={{color: "white"}}>Lista de Productos:</h2>
+            <a href="/productos" className="inline-block bg-[#c41e3a] hover:bg-red-700 text-white font-semibold px-4 py-2 rounded shadow">
+              Agregar Producto
+            </a>
+          </div>
 
-        <ul className="mt-3">
-          {Array.isArray(productos) ? (productos.map(prod => (
-            <li key={prod.id} className="p-2 border-b" style={{color: "white"}}>
-              {prod.nombre} — ${prod.precio}
-            </li>
-          ))) : (<p style={{color: "white"}}>No se pudo cargar</p>)}
-        </ul>
-      </div>
+          {Array.isArray(productos) && productos.length > 0 ? (
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {productos.map((prod) => (
+                <li key={prod.id} className="bg-gray-800 rounded-lg p-4 flex flex-col md:flex-row items-center justify-between gap-4 hover:shadow-lg transform hover:-translate-y-1 transition">
+                  <div className="flex-1">
+                    <h2 className="text-xl font-bold text-white">{prod.nombre}</h2>
+                    <p className="text-sm text-gray-300 mt-1">{prod.descripcion ? prod.descripcion : 'Deliciosa opción'}</p>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <span className="inline-block bg-[#c41e3a] text-white font-semibold px-3 py-1 rounded-full">${prod.precio}</span>
+                    <a href={`/productos/${prod.id}`} className="text-sm border border-white text-white px-3 py-1 rounded hover:bg-white hover:text-gray-900 transition">Eliminar</a>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-white">No se pudo cargar la lista de productos.</p>
+          )}
+        </div>
+      </main>
     </>
   );
 }
