@@ -17,6 +17,35 @@ function Despachador() {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOrder, setModalOrder] = useState(null)
 
+  const OrderTimer = ({ startedAt }) => {
+  const [elapsed, setElapsed] = useState(0);
+  //metodo del tiempo del pedido(del despachador)
+  useEffect(() => {
+    if (!startedAt) return;
+    // actualizar inmediatamente y luego cada segundo
+    setElapsed(Date.now() - startedAt);
+    const id = setInterval(() => setElapsed(Date.now() - startedAt), 1000);
+    return () => clearInterval(id);
+  }, [startedAt]);
+
+  const minutes = Math.floor(elapsed / 60000);
+  const seconds = Math.floor((elapsed % 60000) / 1000);
+  const pad = (n) => n.toString().padStart(2, "0");
+
+  // Muestra minutos y segundos; puedes ajustar para mostrar solo minutos si prefieres
+  return (
+    <div className="mt-3 text-sm text-gray-600" title={`Tiempo ${minutes}:${pad(seconds)}`}>
+      Tiempo: {minutes} min {pad(seconds)}s
+    </div>
+  );
+};
+ 
+  
+
+ 
+ 
+ 
+ 
   // modal state handled below (modalOpen/modalOrder)
 
 
@@ -128,7 +157,8 @@ function Despachador() {
                 <button onClick={() => {
 
                   const number = orderNumber ? orderNumber : ((orders.length > 0) ? String(Math.max(...orders.map(o => Number(o.number || 0))) + 1) : '1')
-                  const newOrder = { id: Date.now(), number, items: [] }
+                  //const newOrder = { id: Date.now(), number, items: [] }
+                  const newOrder = { id: Date.now(), number, items: [], startedAt: Date.now() }
                   setOrders(prev => [...prev, newOrder])
                   setActiveOrderId(newOrder.id)
                   setOrderNumber('')
@@ -246,6 +276,8 @@ function Despachador() {
                           Modificar orden
                         </button>
                       </div>
+                      {/* Temporizador dentro del recuadro de la orden, debajo de los botones */}
+                      <OrderTimer startedAt={o.startedAt} />
                     </div>
 
                     {o.items && o.items.length > 0 ? (
