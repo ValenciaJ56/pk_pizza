@@ -122,6 +122,11 @@ function Despachador() {
     }))
   }
   const confirmarOrden = async (order) => {
+    // Validar que la orden tenga items
+    if (!order.items || order.items.length === 0) {
+      alert("No puedes confirmar una orden sin productos");
+      return;
+    }
     // Serializar items al formato esperado: {"producto":{"id":...,"nombre":...,"precio":...},"cantidad":...,"observacion":...}
     const itemsFormato = order.items.map(item => ({
       producto: {
