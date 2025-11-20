@@ -102,9 +102,8 @@ function Despachador() {
     setPedido((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const openModify = (order) => {
-
-    const copy = JSON.parse(JSON.stringify(order))
+  const openModify = (pedido) => {
+    const copy = JSON.parse(JSON.stringify(pedido))
     setModalOrder(copy)
     setModalOpen(true)
   }
@@ -176,6 +175,16 @@ function Despachador() {
     setModalOrder(prev => ({ ...prev, items: prev.items.filter(it => it.id !== itemId) }))
   }
 
+  function eliminarPedido(id){
+    fetch(`http://localhost:8080/api/pedidos/${id}`, {
+        method: "DELETE"
+      })
+      .then(() => {
+        setPedidos(prev => prev.filter(p => p.id !== id));
+      })
+      .catch(error => console.error("Error al eliminar el producto", error));
+  };
+
   function pedidosGuardados(pedidos){
     return (
       <>
@@ -185,7 +194,7 @@ function Despachador() {
               <div className="font-bold text-black">Orden #{pedido.id}</div>
               <div className="flex items-center gap-2">
                 {/*<button onClick={() => setActiveOrderId(o.id)} className="text-sm font-bold px-6 py-1.5 bg-[#edefd6] rounded border">Factura</button>*/}
-                <button onClick={() => setOrders(prev => prev.filter(x => x.id !== pedido.id))} className="text-sm font-bold px-6 py-1.5 bg-red-600 text-white rounded">Eliminar orden</button>
+                <button onClick={() => eliminarPedido(pedido.id)} className="text-sm font-bold px-6 py-1.5 bg-red-600 text-white rounded">Eliminar orden</button>
                 {/* <button onClick={() => setOrders(prev => prev.filter(x => x.id !== o.id))} className="text-sm font-bold px-3 py-1 bg-[#F5A81D] text-white rounded">Modificar orden</button> */}
                 <button onClick={() => openModify(pedido)} className="text-sm font-bold px-6 py-1.5 bg-[#F5A81D] text-white rounded">
                   Modificar orden
@@ -349,26 +358,8 @@ function Despachador() {
                 {[...orders].slice().reverse().map(o => (
                   <div key={o.id} className={`bg-white rounded-lg p-4 ${activeOrderId === o.id ? 'ring-2 ring-red-600' : ''}`}>
                     <div className="flex items-center justify-between mb-3">
-                      <div className="font-bold text-black">Orden #{o.id}</div>
+                      <div className="font-bold text-black">Orden Nueva</div>
                       <div className="flex items-center gap-2">
-                        {/*<button onClick={() => setActiveOrderId(o.id)} className="text-sm font-bold px-6 py-1.5 bg-[#edefd6] rounded border">Factura</button>*/}
-                        <button 
-                          onClick={() => handleEliminarOrden(o)} 
-                          className="text-sm font-bold px-6 py-1.5 bg-red-600 text-white rounded"
-                        >
-                          Eliminar orden
-                        </button>
-
-                        
-                        {/* <button onClick={() => setOrders(prev => prev.filter(x => x.id !== o.id))} className="text-sm font-bold px-3 py-1 bg-[#F5A81D] text-white rounded">Modificar orden</button> */}
-
-
-                        <button
-                          onClick={() => openModify(o)}
-                          className="text-sm font-bold px-6 py-1.5 bg-[#F5A81D] text-white rounded"
-                        >
-                          Modificar orden
-                        </button>
                         <button
                             onClick={() => confirmarOrden(o)}
                             disabled={o.confirmed}
@@ -411,12 +402,7 @@ function Despachador() {
             <div className="fixed inset-0 z-50 flex items-center justify-center">
               <div className="absolute inset-0 bg-black/40" onClick={closeModal}></div>
               <div className="relative bg-white rounded-lg w-full max-w-2xl p-6 z-10 shadow-lg">
-                <h3 className="text-xl font-bold mb-4">Editar Orden #{modalOrder.number}</h3>
-
-                <div className="mb-4">
-                  <label className="text-sm font-bold text-black">Número de orden</label>
-                  <input value={modalOrder.number} onChange={e => updateModalOrderField('number', e.target.value)} className="mt-2 w-40 bg-gray-100 text-gray-900 rounded px-3 py-2 border focus:outline-none focus:border-[#c41e3a] focus:ring-1 focus:ring-[#c41e3a]" />
-                </div>
+                <h3 className="text-xl font-bold mb-4">Editar Orden #{pedido.id}</h3>
 
                 <div className="space-y-3 max-h-64 overflow-auto mb-4">
                   {modalOrder.items && modalOrder.items.length > 0 ? modalOrder.items.map(item => (
