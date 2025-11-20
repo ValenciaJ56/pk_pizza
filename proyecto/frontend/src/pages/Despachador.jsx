@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import OrderTimer from "../components/OrderTimer";
 function Despachador() {
   const navegar = useNavigate();
   const [productos, setProductos] = useState([]);
@@ -17,30 +17,6 @@ function Despachador() {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOrder, setModalOrder] = useState(null)
   const [pedidos, setPedidos] = useState([])
-
-  const OrderTimer = ({ startedAt }) => {
-  const [elapsed, setElapsed] = useState(0);
-  //metodo del tiempo del pedido(del despachador)
-  useEffect(() => {
-    if (!startedAt) return;
-    // actualizar inmediatamente y luego cada segundo
-    setElapsed(Date.now() - startedAt);
-    const id = setInterval(() => setElapsed(Date.now() - startedAt), 1000);
-    return () => clearInterval(id);
-  }, [startedAt]);
-
-  const minutes = Math.floor(elapsed / 60000);
-  const seconds = Math.floor((elapsed % 60000) / 1000);
-  const pad = (n) => n.toString().padStart(2, "0");
-
-  // Muestra minutos y segundos transcurridos
-  return (
-    <div className="mt-3 text-sm text-gray-600" title={`Tiempo ${minutes}:${pad(seconds)}`}>
-      Tiempo: {minutes} min {pad(seconds)}s
-    </div>
-  );
-};
- 
 
   // modal state handled below (modalOpen/modalOrder)
 
@@ -158,7 +134,7 @@ function Despachador() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(pedidoGuardar)
       });
-      
+      localStorage.setItem(`order_${order.id}_startedAt`, Date.now().toString());
       // Marcar localmente como confirmada después de guardar en backend
       
       setOrders(prev => prev.map(o => o.id === order.id ? { ...o, confirmed: true, confirmedAt: Date.now(), startedAt: Date.now() } : o));
@@ -205,7 +181,7 @@ function Despachador() {
                 </button>
               </div>
               {/* Temporizador dentro del recuadro de la orden, debajo de los botones */}
-              <OrderTimer startedAt={pedido.startedAt} />
+              <OrderTimer startedAt={pedido.startedAt} orderId={pedido.id} />
             </div>
 
             {pedido.items && pedido.items.length > 0 ? (
@@ -371,7 +347,7 @@ function Despachador() {
                           </button>
                       </div>
                       {/* Temporizador dentro del recuadro de la orden, debajo de los botones */}
-                      <OrderTimer startedAt={o.startedAt} />
+                      <OrderTimer startedAt={o.startedAt} orderId={o.id} />
                     </div>
 
                     {o.items && o.items.length > 0 ? (
