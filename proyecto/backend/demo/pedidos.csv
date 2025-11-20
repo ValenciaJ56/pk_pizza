@@ -1,3 +1,5 @@
 {"id":19,"items":[{"producto":{"id":6,"nombre":" Salami Pepperoni Personal","precio":35000},"cantidad":1,"observacion":""},{"producto":{"id":8,"nombre":" Hawaina Personal","precio":35000},"cantidad":1,"observacion":""}],"estado":"listo"}
 {"id":20,"items":[{"producto":{"id":27,"nombre":"Pepsi","precio":3800},"cantidad":1,"observacion":""}],"estado":"listo"}
 {"id":21,"items":[{"producto":{"id":9,"nombre":" Carnes Mixtas Mediana","precio":48000},"cantidad":1,"observacion":""}],"estado":"listo"}
+{"id":22,"items":[{"producto":{"id":3,"nombre":" Pollo Champ Mediana","precio":45000},"cantidad":1,"observacion":""}],"estado":"espera"}
+{"id":23,"items":[{"producto":{"id":1,"nombre":" Picoso PK Mediana","precio":50000},"cantidad":1,"observacion":""}],"estado":"espera"}

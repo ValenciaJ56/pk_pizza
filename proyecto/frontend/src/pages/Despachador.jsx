@@ -60,7 +60,7 @@ function Despachador() {
     if (!prod) return;
 
     const nuevo = {
-      id: Date.now(),
+      id: pedidos.length + 1,
       productoId: prod.id,
       nombre: prod.nombre,
       cantidad: Number(cantidad) || 1,
@@ -139,7 +139,7 @@ function Despachador() {
     }));
 
     const pedidoGuardar = {
-      numero: order.number,
+      numero: order.number,//puede que sea order.id
       items: itemsFormato,
       estado: "espera" // estado inicial
     };
@@ -158,6 +158,24 @@ function Despachador() {
       alert("Error al confirmar la orden");
     }
   }
+  const handleEliminarOrden = async (order) => {
+  try {
+    const response = await fetch(`http://localhost:8080/api/pedidos/${order.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" }
+    });
+    
+    if (response.ok) {
+      setOrders(prev => prev.filter(x => x.id !== order.id));
+      alert("Orden eliminada correctamente");
+    } else {
+      alert("Error al eliminar la orden");
+    }
+  } catch (err) {
+    console.error("Error al eliminar orden:", err);
+    alert("Error al eliminar la orden");
+  }
+};
     
   
 
@@ -296,7 +314,12 @@ function Despachador() {
                       <div className="font-bold text-black">Orden #{o.number}</div>
                       <div className="flex items-center gap-2">
                         {/*<button onClick={() => setActiveOrderId(o.id)} className="text-sm font-bold px-6 py-1.5 bg-[#edefd6] rounded border">Factura</button>*/}
-                        <button onClick={() => setOrders(prev => prev.filter(x => x.id !== o.id))} className="text-sm font-bold px-6 py-1.5 bg-red-600 text-white rounded">Eliminar orden</button>
+                        <button 
+                          onClick={() => handleEliminarOrden(o)} 
+                          className="text-sm font-bold px-6 py-1.5 bg-red-600 text-white rounded"
+                        >
+                          Eliminar orden
+                        </button>
 
                         
                         {/* <button onClick={() => setOrders(prev => prev.filter(x => x.id !== o.id))} className="text-sm font-bold px-3 py-1 bg-[#F5A81D] text-white rounded">Modificar orden</button> */}
