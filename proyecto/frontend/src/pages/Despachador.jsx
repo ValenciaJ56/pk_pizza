@@ -91,7 +91,9 @@ function Despachador() {
 
   const saveModal = () => {
     if (!modalOrder) return
-    setOrders(prev => prev.map(o => o.id === modalOrder.id ? modalOrder : o))
+    const idNum = Number(modalOrder.id)
+    setOrders(prev => prev.map(o => Number(o.id) === idNum ? modalOrder : o))
+    setPedidos(prev => prev.map(p => Number(p.id) === idNum ? modalOrder : p))
     setModalOpen(false)
     setModalOrder(null)
   }
@@ -101,9 +103,19 @@ function Despachador() {
   }
 
   const updateModalItemField = (itemId, field, value) => {
+    const idNum = Number(itemId)
     setModalOrder(prev => ({
       ...prev,
-      items: prev.items.map(it => it.id === itemId ? { ...it, [field]: value } : it)
+      items: (prev.items || []).map(it => {
+        const itId = it.id ?? (it.producto && it.producto.id)
+        if (Number(itId) === idNum) {
+          const updated = { ...it, [field]: value }
+          if (field === 'observaciones') updated.observacion = value
+          if (field === 'observacion') updated.observaciones = value
+          return updated
+        }
+        return it
+      })
     }))
   }
   const confirmarOrden = async (order) => {
@@ -148,7 +160,8 @@ function Despachador() {
   
 
   const removeModalItem = (itemId) => {
-    setModalOrder(prev => ({ ...prev, items: prev.items.filter(it => it.id !== itemId) }))
+    const idNum = Number(itemId)
+    setModalOrder(prev => ({ ...prev, items: (prev.items || []).filter(it => Number(it.id ?? (it.producto && it.producto.id)) !== idNum) }))
   }
 
   function eliminarPedido(id){
@@ -387,7 +400,7 @@ function Despachador() {
                         <div className="font-semibold text-gray-900">{item.producto.nombre}</div>
                         <div className="mt-2 flex items-center gap-2">
                           <label className="text-sm">Cant</label>
-                          <input type="number" min="1" value={item.cantidad} onChange={e => updateModalItemField(item.id, 'cantidad', Number(e.target.value))} className="w-20 bg-white border rounded px-2 py-1" />
+                          <input type="number" min="1" value={item.cantidad} onChange={e => updateModalItemField(item.producto?.id ?? item.id, 'cantidad', Number(e.target.value))} className="w-20 bg-white border rounded px-2 py-1" />
                           {/*<label className="text-sm">Tamaño</label>
                           <select value={item.tamano} onChange={e => updateModalItemField(item.id, 'tamano', e.target.value)} className="bg-white border rounded px-2 py-1">
                             <option value="pequeño">Personal</option>
@@ -397,7 +410,7 @@ function Despachador() {
                         </div>
                         <div className="mt-2">
                           <label className="text-sm">Observaciones</label>
-                          <input value={item.observacion} onChange={e => updateModalItemField(item.id, 'observaciones', e.target.value)} className="mt-1 w-full bg-white border rounded px-2 py-1" />
+                          <input value={item.observacion || item.observaciones || ''} onChange={e => updateModalItemField(item.producto?.id ?? item.id, 'observaciones', e.target.value)} className="mt-1 w-full bg-white border rounded px-2 py-1" />
                         </div>
                       </div>
                       <div className="flex flex-col gap-2 items-end">
