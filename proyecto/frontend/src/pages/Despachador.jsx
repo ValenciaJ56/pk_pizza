@@ -402,31 +402,31 @@ function Despachador() {
             <div className="fixed inset-0 z-50 flex items-center justify-center">
               <div className="absolute inset-0 bg-black/40" onClick={closeModal}></div>
               <div className="relative bg-white rounded-lg w-full max-w-2xl p-6 z-10 shadow-lg">
-                <h3 className="text-xl font-bold mb-4">Editar Orden #{pedido.id}</h3>
+                <h3 className="text-xl font-bold mb-4">Editar Orden #{modalOrder.id}</h3>
 
                 <div className="space-y-3 max-h-64 overflow-auto mb-4">
                   {modalOrder.items && modalOrder.items.length > 0 ? modalOrder.items.map(item => (
-                    <div key={item.id} className="flex items-start justify-between gap-4 p-2 bg-gray-50 rounded">
+                    <div key={item.producto.id} className="flex items-start justify-between gap-4 p-2 bg-gray-50 rounded">
                       <div className="flex-1">
-                        <div className="font-semibold text-gray-900">{item.nombre}</div>
+                        <div className="font-semibold text-gray-900">{item.producto.nombre}</div>
                         <div className="mt-2 flex items-center gap-2">
                           <label className="text-sm">Cant</label>
                           <input type="number" min="1" value={item.cantidad} onChange={e => updateModalItemField(item.id, 'cantidad', Number(e.target.value))} className="w-20 bg-white border rounded px-2 py-1" />
-                          <label className="text-sm">Tamaño</label>
+                          {/*<label className="text-sm">Tamaño</label>
                           <select value={item.tamano} onChange={e => updateModalItemField(item.id, 'tamano', e.target.value)} className="bg-white border rounded px-2 py-1">
                             <option value="pequeño">Personal</option>
                             <option value="mediano">Mediano</option>
                             <option value="grande">Grande</option>
-                          </select>
+                          </select>*/} {/*comenté esto, porque si. nah mentiras para el prox. sprint */}
                         </div>
                         <div className="mt-2">
                           <label className="text-sm">Observaciones</label>
-                          <input value={item.observaciones} onChange={e => updateModalItemField(item.id, 'observaciones', e.target.value)} className="mt-1 w-full bg-white border rounded px-2 py-1" />
+                          <input value={item.observacion} onChange={e => updateModalItemField(item.id, 'observaciones', e.target.value)} className="mt-1 w-full bg-white border rounded px-2 py-1" />
                         </div>
                       </div>
                       <div className="flex flex-col gap-2 items-end">
-                        <div className="text-gray-900 font-medium">${(item.precioUnitario * item.cantidad).toFixed(2)}</div>
-                        <button onClick={() => removeModalItem(item.id)} className="text-sm px-3 py-1 bg-red-600 text-white rounded">Eliminar</button>
+                        <div className="text-gray-900 font-medium">${(item.producto.precio * item.cantidad).toFixed(2)}</div>
+                        <button onClick={() => removeModalItem(item.producto.id)} className="text-sm px-3 py-1 bg-red-600 text-white rounded">Eliminar</button>
                       </div>
                     </div>
                   )) : (
