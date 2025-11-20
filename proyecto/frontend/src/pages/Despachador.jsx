@@ -149,7 +149,7 @@ function Despachador() {
     }));
 
     const pedidoGuardar = {
-      numero: order.number,//puede que sea order.id
+      numero: order.id,//puede que sea order.id
       items: itemsFormato,
       estado: "espera" // estado inicial
     };
@@ -161,6 +161,7 @@ function Despachador() {
       });
       
       // Marcar localmente como confirmada después de guardar en backend
+      
       setOrders(prev => prev.map(o => o.id === order.id ? { ...o, confirmed: true, confirmedAt: Date.now(), startedAt: Date.now() } : o));
       if (activeOrderId === order.id) setActiveOrderId(null);
     } catch (err) {
@@ -168,25 +169,7 @@ function Despachador() {
       alert("Error al confirmar la orden");
     }
   }
-  const handleEliminarOrden = async (order) => {
-  try {
-    const response = await fetch(`http://localhost:8080/api/pedidos/${order.id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" }
-    });
-    
-    if (response.ok) {
-      setOrders(prev => prev.filter(x => x.id !== order.id));
-      alert("Orden eliminada correctamente");
-    } else {
-      alert("Error al eliminar la orden");
-    }
-  } catch (err) {
-    console.error("Error al eliminar orden:", err);
-    alert("Error al eliminar la orden");
-  }
-};
-    
+
   
 
   const removeModalItem = (itemId) => {
@@ -264,7 +247,7 @@ function Despachador() {
                 <button onClick={() => {
 
                   const number = orderNumber ? orderNumber : ((orders.length > 0) ? String(Math.max(...orders.map(o => Number(o.number || 0))) + 1) : '1')
-                  const newOrder = { id: Date.now(), number, items: [] }
+                  const newOrder = { id: pedidos.length + 1, number, items: [] }
                   setOrders(prev => [...prev, newOrder])
                   setActiveOrderId(newOrder.id)
                   setOrderNumber('')
@@ -306,12 +289,12 @@ function Despachador() {
                 </div>
 
                 <div className="mt-4">
-                  <label className="block text-xl font-bold text-black">
+                  {/*<label className="block text-xl font-bold text-black">
                       Tamaño
-                    </label>
+                    </label>*/}
 
 
-                <div className="flex flex-wrap gap-3 mt-2">
+                {/*div className="flex flex-wrap gap-3 mt-2">
                   {[
                     { id: "pequeño", label: "Personal" },
                     { id: "mediano", label: "Mediano" },
@@ -330,7 +313,7 @@ function Despachador() {
                       {t.label}
                     </button>
                   ))}
-                </div>
+                </div>*/}
               </div>
             </div>
 
@@ -366,7 +349,7 @@ function Despachador() {
                 {[...orders].slice().reverse().map(o => (
                   <div key={o.id} className={`bg-white rounded-lg p-4 ${activeOrderId === o.id ? 'ring-2 ring-red-600' : ''}`}>
                     <div className="flex items-center justify-between mb-3">
-                      <div className="font-bold text-black">Orden #{o.number}</div>
+                      <div className="font-bold text-black">Orden #{o.id}</div>
                       <div className="flex items-center gap-2">
                         {/*<button onClick={() => setActiveOrderId(o.id)} className="text-sm font-bold px-6 py-1.5 bg-[#edefd6] rounded border">Factura</button>*/}
                         <button 
