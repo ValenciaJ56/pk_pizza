@@ -98,6 +98,24 @@ function Despachador() {
     setModalOrder(null)
   }
 
+  function modificarPedido(pedido){
+    fetch(`http://localhost:8080/api/pedidos/${pedido.id}`, { 
+      method: "PUT",
+      headers: { "Content-Type" : "application/json"},
+      body: JSON.stringify({
+        estado: pedido.estado,
+        items: pedido.items
+      })
+    })
+      .then(() => {
+        setPedidos(prev =>
+          prev.map(p => (p.id === pedido.id ? {...p, items: pedido.items}: p))
+        )})
+      .catch(error => console.error("Error al obtener pedidos:", error));
+    setModalOpen(false)
+    setModalOrder(null)
+  }
+
   const updateModalOrderField = (field, value) => {
     setModalOrder(prev => ({ ...prev, [field]: value }))
   }
@@ -118,7 +136,7 @@ function Despachador() {
       })
     }))
   }
-  const confirmarOrden = async (order) => {
+  const confirmarOrden = async (order,pedidos) => {
     // Validar que la orden tenga items
     if (!order.items || order.items.length === 0) {
       alert("No puedes confirmar una orden sin productos");
@@ -151,6 +169,7 @@ function Despachador() {
       
       setOrders(prev => prev.map(o => o.id === order.id ? { ...o, confirmed: true, confirmedAt: Date.now(), startedAt: Date.now() } : o));
       if (activeOrderId === order.id) setActiveOrderId(null);
+
     } catch (err) {
       console.error("Error al confirmar orden en backend:", err);
       alert("Error al confirmar la orden");
@@ -175,9 +194,11 @@ function Despachador() {
   };
 
   function pedidosGuardados(pedidos){
+    const pedidosFiltrados = pedidos.filter(pedido => pedido.estado !== "listo");
+
     return (
       <>
-        {pedidos.map(pedido => (
+        {pedidosFiltrados.map(pedido => (
           <div key={pedido.id} className={`bg-white rounded-lg p-4 ${activeOrderId === pedido.id ? 'ring-2 ring-red-600' : ''}`}>
             <div className="flex items-center justify-between mb-3">
               <div className="font-bold text-black">Orden #{pedido.id}</div>
@@ -350,7 +371,7 @@ function Despachador() {
                       <div className="font-bold text-black">Orden Nueva</div>
                       <div className="flex items-center gap-2">
                         <button
-                            onClick={() => confirmarOrden(o)}
+                            onClick={() => confirmarOrden(o, pedidos)}
                             disabled={o.confirmed}
                             
                             className={`text-sm font-bold px-6 py-1.5 rounded ${o.confirmed ? 'bg-gray-300 text-gray-700 cursor-default' : 'bg-green-600 text-white'}`}
@@ -360,7 +381,6 @@ function Despachador() {
                           </button>
                       </div>
                       {/* Temporizador dentro del recuadro de la orden, debajo de los botones */}
-                      <OrderTimer startedAt={o.startedAt} orderId={o.id} />
                     </div>
 
                     {o.items && o.items.length > 0 ? (
@@ -426,7 +446,7 @@ function Despachador() {
 
                 <div className="flex justify-end gap-3">
                   <button onClick={closeModal} className="px-4 py-2 bg-gray-100 rounded border">Cancelar</button>
-                  <button onClick={saveModal} className="px-4 py-2 bg-[#c41e3a] text-white rounded">Guardar cambios</button>
+                  <button onClick={() => modificarPedido(modalOrder)} className="px-4 py-2 bg-[#c41e3a] text-white rounded">Guardar cambios</button>
                 </div>
               </div>
             </div>
