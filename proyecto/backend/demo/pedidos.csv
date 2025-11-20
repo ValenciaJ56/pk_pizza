@@ -8,4 +8,11 @@
 {"id":12,"items":[{"producto":{"id":32,"nombre":"Botella de Agua","precio":2500},"cantidad":1,"observacion":""}],"estado":"espera"}
 {"id":13,"items":[{"producto":{"id":1,"nombre":" Picoso PK Mediana","precio":50000},"cantidad":1,"observacion":""}],"estado":"espera"}
 {"id":14,"items":[{"producto":{"id":31,"nombre":"Ensalada","precio":15000},"cantidad":1,"observacion":""}],"estado":"espera"}
-{"id":15,"items":[{"producto":{"id":31,"nombre":"Ensalada","precio":15000},"cantidad":1,"observacion":""}],"estado":"espera"}
+{"id":18,"items":[{"producto":{"id":29,"nombre":"Coca Cola","precio":4000},"cantidad":1,"observacion":""}],"estado":"espera"}
+{"id":19,"items":[{"producto":{"id":32,"nombre":"Botella de Agua","precio":2500},"cantidad":1,"observacion":""}],"estado":"espera"}
+{"id":20,"items":[{"producto":{"id":28,"nombre":"Pizza Mexicana","precio":40000},"cantidad":1,"observacion":""}],"estado":"espera"}
+{"id":21,"items":[{"producto":{"id":32,"nombre":"Botella de Agua","precio":2500},"cantidad":1,"observacion":""}],"estado":"espera"}
+{"id":22,"items":[{"producto":{"id":31,"nombre":"Ensalada","precio":15000},"cantidad":1,"observacion":""}],"estado":"espera"}
+{"id":23,"items":[{"producto":{"id":8,"nombre":" Hawaina Personal","precio":35000},"cantidad":1,"observacion":""}],"estado":"espera"}
+{"id":24,"items":[{"producto":{"id":1,"nombre":" Picoso PK Mediana","precio":50000},"cantidad":1,"observacion":""}],"estado":"espera"}
+{"id":25,"items":[{"producto":{"id":5,"nombre":" Salami Pepperoni Mediana","precio":45000},"cantidad":1,"observacion":""}],"estado":"espera"}

@@ -134,7 +134,7 @@ function Despachador() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(pedidoGuardar)
       });
-      localStorage.setItem(`order_${order.id}_startedAt`, Date.now().toString());
+      //localStorage.setItem(`order_${order.id}_startedAt`, Date.now().toString());
       // Marcar localmente como confirmada después de guardar en backend
       
       setOrders(prev => prev.map(o => o.id === order.id ? { ...o, confirmed: true, confirmedAt: Date.now(), startedAt: Date.now() } : o));
@@ -181,7 +181,7 @@ function Despachador() {
                 </button>
               </div>
               {/* Temporizador dentro del recuadro de la orden, debajo de los botones */}
-              <OrderTimer startedAt={pedido.startedAt} orderId={pedido.id} />
+              <OrderTimer orderId={pedido.id} />
             </div>
 
             {pedido.items && pedido.items.length > 0 ? (
@@ -233,6 +233,8 @@ function Despachador() {
 
                   const number = orderNumber ? orderNumber : ((orders.length > 0) ? String(Math.max(...orders.map(o => Number(o.number || 0))) + 1) : '1')
                   const newOrder = { id: pedidos.length + 1, number, items: [] }
+                  // Limpiar localStorage de órdenes anteriores con el mismo ID
+                  localStorage.removeItem(`order_${newOrder.id}_startedAt`);
                   setOrders(prev => [...prev, newOrder])
                   setActiveOrderId(newOrder.id)
                   setOrderNumber('')
@@ -347,7 +349,7 @@ function Despachador() {
                           </button>
                       </div>
                       {/* Temporizador dentro del recuadro de la orden, debajo de los botones */}
-                      <OrderTimer startedAt={o.startedAt} orderId={o.id} />
+                      <OrderTimer orderId={o.id} />
                     </div>
 
                     {o.items && o.items.length > 0 ? (
