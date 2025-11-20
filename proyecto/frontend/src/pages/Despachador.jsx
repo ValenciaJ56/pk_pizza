@@ -16,6 +16,7 @@ function Despachador() {
   const [orderNumber, setOrderNumber] = useState('')
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOrder, setModalOrder] = useState(null)
+  const [pedidos, setPedidos] = useState([])
 
   const OrderTimer = ({ startedAt }) => {
   const [elapsed, setElapsed] = useState(0);
@@ -43,6 +44,15 @@ function Despachador() {
 
   // modal state handled below (modalOpen/modalOrder)
 
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/pedidos", 
+      { method: "GET" 
+      })
+      .then(res => res.json())
+      .then(data => setPedidos(Array.isArray(data) ? data : []))
+      .catch(error => console.error("Error al obtener pedidos:", error));
+  }, []);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/productos")
@@ -183,6 +193,51 @@ function Despachador() {
     setModalOrder(prev => ({ ...prev, items: prev.items.filter(it => it.id !== itemId) }))
   }
 
+  function pedidosGuardados(pedidos){
+    return (
+      <>
+        {pedidos.map(pedido => (
+          <div key={pedido.id} className={`bg-white rounded-lg p-4 ${activeOrderId === pedido.id ? 'ring-2 ring-red-600' : ''}`}>
+            <div className="flex items-center justify-between mb-3">
+              <div className="font-bold text-black">Orden #{pedido.id}</div>
+              <div className="flex items-center gap-2">
+                {/*<button onClick={() => setActiveOrderId(o.id)} className="text-sm font-bold px-6 py-1.5 bg-[#edefd6] rounded border">Factura</button>*/}
+                <button onClick={() => setOrders(prev => prev.filter(x => x.id !== pedido.id))} className="text-sm font-bold px-6 py-1.5 bg-red-600 text-white rounded">Eliminar orden</button>
+                {/* <button onClick={() => setOrders(prev => prev.filter(x => x.id !== o.id))} className="text-sm font-bold px-3 py-1 bg-[#F5A81D] text-white rounded">Modificar orden</button> */}
+                <button onClick={() => openModify(pedido)} className="text-sm font-bold px-6 py-1.5 bg-[#F5A81D] text-white rounded">
+                  Modificar orden
+                </button>
+
+                <button onClick={() => confirmarOrden(pedido)} disabled={pedido.confirmed} className={`text-sm font-bold px-6 py-1.5 rounded bg-gray-300 text-gray-700 cursor-default`}>
+                  Orden confirmada
+                </button>
+              </div>
+              {/* Temporizador dentro del recuadro de la orden, debajo de los botones */}
+              <OrderTimer startedAt={pedido.startedAt} />
+            </div>
+
+            {pedido.items && pedido.items.length > 0 ? (
+            <ul className="divide-y divide-gray-100">
+              {pedido.items.map(item => (
+                <li key={item.producto.id} className="py-3 flex items-center justify-between">
+                  <div>
+                    <div className="font-semibold text-gray-900">{item.producto.nombre} <span className="text-sm text-gray-600">x{item.cantidad}</span></div>
+                      {/*<div className="text-sm text-gray-600">Tamaño: {item.tamano} — {item.observaciones}</div>*/}
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="text-gray-900 font-medium">${(item.producto.precio * item.cantidad).toFixed(2)}</div>
+                    </div>
+                </li>
+              ))}
+            </ul>
+            ) : (
+              <p className="text-gray-600">No hay productos en esta orden.</p>
+            )}
+          </div>
+        ))}
+    </>)
+  }
+
   return (
     <>
       <Header />
@@ -304,7 +359,7 @@ function Despachador() {
           <section className="mt-6">
             <h3 className="text-xl text-black font-bold mb-3">Órdenes</h3>
 
-            {orders.length === 0 ? (
+            {orders.length === 0 && pedidos.length === 0 ? (
               <p className="text-black font-bold ">No hay órdenes creadas</p>
             ) : (
               <div className="space-y-4">
@@ -363,7 +418,8 @@ function Despachador() {
                       <p className="text-gray-600">No hay productos en esta orden.</p>
                     )}
                   </div>
-                ))}
+                ))}  
+                {pedidosGuardados(pedidos)}
               </div>
             )}
           </section>
@@ -407,6 +463,7 @@ function Despachador() {
                   )) : (
                     <p className="text-gray-600">No hay productos en la orden.</p>
                   )}
+                  
                 </div>
 
                 <div className="flex justify-end gap-3">
