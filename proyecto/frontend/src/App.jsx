@@ -13,7 +13,7 @@ console.log(window.location.pathname);
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/pk_pizza">
       <div
         style={{
           backgroundImage: `url(${fondogrande})`,
