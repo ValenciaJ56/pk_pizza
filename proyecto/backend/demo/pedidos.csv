@@ -5,4 +5,4 @@
 {"id":5,"items":[{"producto":{"id":30,"nombre":"Hamburguesa","precio":10000},"cantidad":1,"observacion":""}],"estado":"listo"}
 {"id":6,"items":[{"producto":{"id":2,"nombre":" Picoso PK Personal","precio":38000},"cantidad":1,"observacion":"cnjvsv"}],"estado":"listo"}
 {"id":7,"items":[{"producto":{"id":9,"nombre":" Carnes Mixtas Mediana","precio":48000},"cantidad":1,"observacion":"3-4\n"}],"estado":"listo"}
-{"id":8,"items":[{"producto":{"id":4,"nombre":" Pollo Champ Personal","precio":35000},"cantidad":1,"observacion":""}],"estado":"espera"}
+{"id":8,"items":[{"producto":{"id":4,"nombre":" Pollo Champ Personal","precio":35000},"cantidad":1,"observacion":""}],"estado":"listo"}
