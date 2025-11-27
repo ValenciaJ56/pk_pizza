@@ -4,7 +4,7 @@ import Despachador from "./pages/Despachador"
 import Error from "./pages/Error"
 import Menu from "./pages/Menu"
 import Footer from "./components/footer"
-import { BrowserRouter, Routes, Route} from "react-router-dom"
+import { HashRouter, Routes, Route} from "react-router-dom"
 import fondogrande from "./assets/fondogrande.jpg";
 import Productos from "./pages/Productos"
 import PedidosDashboard from "./components/PedidosDashboard"
@@ -13,7 +13,7 @@ console.log(window.location.pathname);
 
 function App() {
   return (
-    <BrowserRouter basename="/pk_pizza">
+    <HashRouter>
       <div
         style={{
           backgroundImage: `url(${fondogrande})`,
@@ -44,7 +44,7 @@ function App() {
         </div>
       </div>
       <Footer />
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
