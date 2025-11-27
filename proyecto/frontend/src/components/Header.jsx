@@ -12,12 +12,12 @@ const Header = () => {
         <nav>
           <ul className="flex space-x-6">
             <li>
-              <a href="/" className="text-white text-lg font-medium hover:text-[#c41e3a]">
+              <a href="pk_pizza" className="text-white text-lg font-medium hover:text-[#c41e3a]">
                 Inicio
               </a>
             </li>
             <li>
-              <a href="./menu" className="text-white text-lg font-medium hover:text-[#c41e3a]">
+              <a href="pk_pizza/menu" className="text-white text-lg font-medium hover:text-[#c41e3a]">
                 Menú
               </a>
             </li>
