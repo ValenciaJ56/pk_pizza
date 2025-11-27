@@ -8,6 +8,9 @@ import { BrowserRouter, Routes, Route} from "react-router-dom"
 import fondogrande from "./assets/fondogrande.jpg";
 import Productos from "./pages/Productos"
 import PedidosDashboard from "./components/PedidosDashboard"
+
+console.log(window.location.pathname);
+
 function App() {
   return (
     <BrowserRouter>
