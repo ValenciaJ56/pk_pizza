@@ -17,7 +17,7 @@ const Header = () => {
               </a>
             </li>
             <li>
-              <a href="/menu" className="text-white text-lg font-medium hover:text-[#c41e3a]">
+              <a href="./menu" className="text-white text-lg font-medium hover:text-[#c41e3a]">
                 Menú
               </a>
             </li>
