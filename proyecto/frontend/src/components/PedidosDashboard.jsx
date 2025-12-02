@@ -8,7 +8,7 @@ const PedidosDashboard = () => {
     listos: 1
   });
 
-  const [filtroActivo, setFiltroActivo] = useState('todos');
+  const [filtroActivo, setFiltroActivo] = useState('espera');
 
   const [pedidos, setPedidos] = useState([]);
   

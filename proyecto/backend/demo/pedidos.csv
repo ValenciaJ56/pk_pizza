@@ -6,3 +6,5 @@
 {"id":6,"items":[{"producto":{"id":2,"nombre":" Picoso PK Personal","precio":38000},"cantidad":1,"observacion":"cnjvsv"}],"estado":"listo"}
 {"id":7,"items":[{"producto":{"id":9,"nombre":" Carnes Mixtas Mediana","precio":48000},"cantidad":1,"observacion":"3-4\n"}],"estado":"listo"}
 {"id":8,"items":[{"producto":{"id":4,"nombre":" Pollo Champ Personal","precio":35000},"cantidad":1,"observacion":""}],"estado":"listo"}
+{"id":9,"items":[{"producto":{"id":32,"nombre":"Botella de Agua","precio":2500},"cantidad":2,"observacion":""}],"estado":"preparacion"}
+{"id":10,"items":[{"producto":{"id":29,"nombre":"Coca Cola","precio":4000},"cantidad":1,"observacion":"La buena"}],"estado":"espera"}
