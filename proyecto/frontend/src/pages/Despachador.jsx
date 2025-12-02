@@ -136,7 +136,7 @@ function Despachador() {
       })
     }))
   }
-  const confirmarOrden = async (order,pedidos) => {
+  const confirmarOrden = async (order, pedidos) => {
     // Validar que la orden tenga items
     if (!order.items || order.items.length === 0) {
       alert("No puedes confirmar una orden sin productos");
@@ -174,6 +174,8 @@ function Despachador() {
       console.error("Error al confirmar orden en backend:", err);
       alert("Error al confirmar la orden");
     }
+
+    {pedidosGuardados(pedidos)}
   }
 
   
@@ -371,7 +373,9 @@ function Despachador() {
                       <div className="font-bold text-black">Orden Nueva</div>
                       <div className="flex items-center gap-2">
                         <button
-                            onClick={() => confirmarOrden(o, pedidos)}
+                            onClick={() => { 
+                              confirmarOrden(o, pedidos)
+                              pedidosGuardados(pedidos)}}
                             disabled={o.confirmed}
                             
                             className={`text-sm font-bold px-6 py-1.5 rounded ${o.confirmed ? 'bg-gray-300 text-gray-700 cursor-default' : 'bg-green-600 text-white'}`}
