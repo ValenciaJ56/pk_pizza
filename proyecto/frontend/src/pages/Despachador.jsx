@@ -41,6 +41,10 @@ function Despachador() {
     navegar("/productos");
   };
 
+  const irAPedidos = () => {
+    navegar("/pedidos");
+  };
+
   const handleAdd = () => {
     const prod = productos.find((p) => String(p.id) === String(selectedId));
     if (!prod) return;
@@ -149,6 +153,7 @@ function Despachador() {
         nombre: item.nombre,
         precio: item.precioUnitario
       },
+      estado: item.estado,
       cantidad: item.cantidad,
       observacion: item.observaciones || ""
     }));
@@ -203,7 +208,7 @@ function Despachador() {
         {pedidosFiltrados.map(pedido => (
           <div key={pedido.id} className={`bg-white rounded-lg p-4 ${activeOrderId === pedido.id ? 'ring-2 ring-red-600' : ''}`}>
             <div className="flex items-center justify-between mb-3">
-              <div className="font-bold text-black">Orden #{pedido.id}</div>
+              <div className="font-bold text-black">Orden #{pedido.id} ({pedido.estado == "espera" ? 'En espera' : 'En preparación'})</div>
               <div className="flex items-center gap-2">
                 {/*<button onClick={() => setActiveOrderId(o.id)} className="text-sm font-bold px-6 py-1.5 bg-[#edefd6] rounded border">Factura</button>*/}
                 <button onClick={() => eliminarPedido(pedido.id)} className="text-sm font-bold px-6 py-1.5 bg-red-600 text-white rounded">Eliminar orden</button>
@@ -225,11 +230,11 @@ function Despachador() {
               {pedido.items.map(item => (
                 <li key={item.producto.id} className="py-3 flex items-center justify-between">
                   <div>
-                    <div className="font-semibold text-gray-900">{item.producto.nombre} <span className="text-sm text-gray-600">x{item.cantidad}</span></div>
+                    <div className="font-semibold text-gray-900">{item.producto.nombre} <span className="text-sm text-gray-600">x {item.cantidad}</span></div>
                       {/*<div className="text-sm text-gray-600">Tamaño: {item.tamano} — {item.observaciones}</div>*/}
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="text-gray-900 font-medium">${(item.producto.precio * item.cantidad).toFixed(2)}</div>
+                      <div className="text-gray-900 font-medium">$ {(item.producto.precio * item.cantidad).toFixed(2)}</div>
                     </div>
                 </li>
               ))}
@@ -253,9 +258,13 @@ function Despachador() {
             <h2 className="text-2xl font-bold">Despachador</h2>
             <button
               onClick={irAProductos}
-              className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md"
-            >
+              className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
               Ver Productos
+            </button>
+            <button
+              onClick={irAPedidos}
+              className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
+              Ver Pedidos
             </button>
           </div>
           <div className="bg-white rounded-lg p-6 shadow-2xl">
