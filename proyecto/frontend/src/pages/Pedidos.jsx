@@ -4,9 +4,32 @@ import Header from "../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import {jsPDF} from "jspdf";
+import { Variable } from "lucide-react";
+
 function Pedidos() {
   const navegar = useNavigate();
-  
+
+  const crearFactura = (pedido) => {
+    const doc = new jsPDF();
+    let variable = 60;
+    doc.text("Factura PK Pizza", 80, 15)
+    doc.line(0, 20, 500, 20)
+    doc.text("Producto", 10, 40)
+    doc.text("Cantidad", 80, 40)
+    doc.text("Precio Unitario", 120, 40)
+    doc.text("Total", 160, 40)
+
+    pedido.items.forEach(item => {
+        doc.text(`${item.producto.nombre}`, 10, variable)
+        doc.text(`${item.cantidad}`, 80, variable)
+        doc.text(`${item.producto.precio}`, 120, variable)
+        doc.text(`${item.producto.precio * item.cantidad}`, 160, variable)
+        variable += 20
+    })
+    doc.save(`pedido ${pedido.id}.pdf`)
+  }
+
   const irADespachador = () => {
     navegar("/despachador");
   }
@@ -77,7 +100,7 @@ function Pedidos() {
                 )}
 
                   <div className="flex items-center gap-4">
-                    <button onClick={() => crearFactura(pedido.id)} className="text-sm border border-gray-300 text-gray-900 px-3 py-1 rounded hover:bg-gray-100 transition">Crear Factura</button>
+                    <button onClick={() => crearFactura(pedido)} className="text-sm border border-gray-300 text-gray-900 px-3 py-1 rounded hover:bg-gray-100 transition">Crear Factura</button>
                     <span className="inline-block bg-[#c41e3a] text-white font-semibold px-4 py-2 rounded-full">$ {calcularTotal(pedido)}</span>
                   </div>
                 </div>
