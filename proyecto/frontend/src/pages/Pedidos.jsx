@@ -6,27 +6,41 @@ import { useNavigate } from "react-router-dom";
 
 import {jsPDF} from "jspdf";
 import { Variable } from "lucide-react";
+import logo from "../assets/logo.jpeg"
 
 function Pedidos() {
   const navegar = useNavigate();
 
   const crearFactura = (pedido) => {
+    const img = new Image()
+    img.src = logo
     const doc = new jsPDF();
-    let variable = 60;
-    doc.text("Factura PK Pizza", 80, 15)
-    doc.line(0, 20, 500, 20)
-    doc.text("Producto", 10, 40)
-    doc.text("Cantidad", 80, 40)
-    doc.text("Precio Unitario", 120, 40)
-    doc.text("Total", 160, 40)
+    let altura = 20;
+    doc.text("Factura PK Pizza", 60, altura)
+    doc.addImage(img, 140, altura-15, 25, 25)
+    altura += 20
+
+    doc.text("Producto", 10, altura)
+    doc.text("Cantidad", 80, altura)
+    doc.text("Precio Unitario", 120, altura)
+    doc.text("Total", 170, altura)
+
+    altura += 15
 
     pedido.items.forEach(item => {
-        doc.text(`${item.producto.nombre}`, 10, variable)
-        doc.text(`${item.cantidad}`, 80, variable)
-        doc.text(`${item.producto.precio}`, 120, variable)
-        doc.text(`${item.producto.precio * item.cantidad}`, 160, variable)
-        variable += 20
+        doc.text(`${item.producto.nombre}`, 10, altura)
+        doc.text(`${item.cantidad}`, 80, altura)
+        doc.text(`$ ${item.producto.precio}`, 120, altura)
+        doc.text(`$ ${item.producto.precio * item.cantidad}`, 170, altura)
+        altura += 10
     })
+
+    altura += 5
+    doc.text("Total", 10, altura)
+    doc.text(`$ ${calcularTotal(pedido)}`, 170, altura)
+    altura += 30
+
+    doc.text("Gracias por su visita", 80, altura)
     doc.save(`pedido ${pedido.id}.pdf`)
   }
 
