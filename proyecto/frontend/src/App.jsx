@@ -9,6 +9,7 @@ import fondogrande from "./assets/fondogrande.jpg";
 import Productos from "./pages/Productos"
 import PedidosDashboard from "./components/PedidosDashboard"
 import Pedidos from "./pages/Pedidos"
+import CierreCaja from "./pages/CierreCaja"
 
 console.log(window.location.pathname);
 
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/despachador" element={<Despachador />} />
                 <Route path="/productos" element={<Productos />} />
                 <Route path="/pedidos" element={<Pedidos />} />
+                <Route path="/cierre" element={<CierreCaja />} />
 
                 <Route path="*" element={<Error />} />
               </Routes>

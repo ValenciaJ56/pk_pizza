@@ -45,6 +45,10 @@ function Despachador() {
     navegar("/pedidos");
   };
 
+  const irACierreCaja = () => {
+    navegar("/cierre");
+  };
+
   const handleAdd = () => {
     const prod = productos.find((p) => String(p.id) === String(selectedId));
     if (!prod) return;
@@ -256,16 +260,23 @@ function Despachador() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold">Despachador</h2>
-            <button
-              onClick={irAProductos}
-              className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
-              Ver Productos
-            </button>
-            <button
-              onClick={irAPedidos}
-              className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
-              Ver Pedidos
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={irACierreCaja}
+                className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
+                Cerrar Caja
+              </button>
+              <button
+                onClick={irAProductos}
+                className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
+                Ver Productos
+              </button>
+              <button
+                onClick={irAPedidos}
+                className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
+                Ver Pedidos
+              </button>
+            </div>
           </div>
           <div className="bg-white rounded-lg p-6 shadow-2xl">
             <div className="flex items-center justify-between mb-4">
@@ -370,7 +381,7 @@ function Despachador() {
           </div>
 
           <section className="mt-6">
-            <h3 className="text-xl text-black font-bold mb-3">Órdenes</h3>
+            <h3 className="text-xl text-black font-bold mb-3">Órdenes Pendientes</h3>
 
             {orders.length === 0 && pedidos.length === 0 ? (
               <p className="text-black font-bold ">No hay órdenes creadas</p>

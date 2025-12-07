@@ -110,7 +110,7 @@ function Productos() {
                 <li key={producto.id} className="bg-white rounded-lg p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-md hover:shadow-lg transition transform hover:-translate-y-1">
                   <div className="flex-1">
                     <h2 className="text-xl font-bold text-gray-900">{producto.nombre}</h2>
-                    <p className="text-sm text-gray-600 mt-1">{producto.descripcion ? producto.descripcion : 'Deliciosa opción'}</p>
+                    {/*<p className="text-sm text-gray-600 mt-1">{producto.descripcion ? producto.descripcion : 'Deliciosa opción'}</p>*/}
                   </div>
 
                   <div className="flex items-center gap-4">
@@ -144,10 +144,10 @@ function Productos() {
                 <input value={nuevoPrecio} onChange={e => setNuevoPrecio(e.target.value)} className="mt-2 w-full bg-gray-100 text-gray-900 rounded px-3 py-2 border" />
               </div>
 
-              <div>
+              {/*<div>
                 <label className="block text-sm font-semibold">Descripción (opcional)</label>
                 <input value={nuevaDescripcion} onChange={e => setNuevaDescripcion(e.target.value)} className="mt-2 w-full bg-gray-100 text-gray-900 rounded px-3 py-2 border" />
-              </div>
+              </div>*/}
             </div>
 
             <div className="mt-4 flex justify-end gap-3">

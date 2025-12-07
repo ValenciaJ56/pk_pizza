@@ -11,6 +11,10 @@ import logo from "../assets/logo.jpeg"
 function Pedidos() {
   const navegar = useNavigate();
 
+  function pedidosFiltrados(pedidos){
+    return pedidos.filter(pedido => pedido.estado === "listo");
+  }
+
   const crearFactura = (pedido) => {
     const img = new Image()
     img.src = logo
@@ -89,7 +93,7 @@ function Pedidos() {
 
           {Array.isArray(pedidos) && pedidos.length > 0 ? (
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {pedidos.map((pedido) => (
+              {pedidosFiltrados(pedidos).map((pedido) => (
                 <div key={pedido.id} className="bg-white rounded-lg p-4">
                   <div className="flex-1">
                     <h2 className="text-xl font-bold text-gray-900">Orden #{pedido.id}</h2>
@@ -113,7 +117,7 @@ function Pedidos() {
                     <p className="text-gray-600">No hay productos en esta orden.</p>
                 )}
 
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center justify-between gap-4 mt-4">
                     <button onClick={() => crearFactura(pedido)} className="text-sm border border-gray-300 text-gray-900 px-3 py-1 rounded hover:bg-gray-100 transition">Crear Factura</button>
                     <span className="inline-block bg-[#c41e3a] text-white font-semibold px-4 py-2 rounded-full">$ {calcularTotal(pedido)}</span>
                   </div>
