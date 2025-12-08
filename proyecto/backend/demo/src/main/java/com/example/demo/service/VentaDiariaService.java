@@ -10,6 +10,7 @@ public class VentaDiariaService {
     private final VentaDiariaRepository repo = new VentaDiariaRepository();
 
     public void crearVentaDiaria(VentaDiaria venta) throws IOException {
+        venta.setId(repo.generarId());
         repo.guardar(venta);
     }
 

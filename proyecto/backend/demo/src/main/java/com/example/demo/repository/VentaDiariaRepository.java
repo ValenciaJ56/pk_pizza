@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.model.Pedido;
 import com.example.demo.model.VentaDiaria;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -44,6 +45,18 @@ public class VentaDiariaRepository {
     public String generarFecha() throws IOException {
         String fecha = "hoy";
         return fecha;
+    }
+
+    public int generarId() throws IOException {
+        List<VentaDiaria> ventas = listar();
+        int max = 0;
+
+        for (VentaDiaria venta : ventas) {
+            if (venta.getId() > max) {
+                max = venta.getId();
+            }
+        }
+        return max + 1;
     }
 
 }

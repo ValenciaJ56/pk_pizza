@@ -9,6 +9,7 @@ import {saveAs} from "file-saver";
 function CierreCaja() {
   const navegar = useNavigate();
   const [pedidos, setPedidos] = useState([]);
+  const [ventas, setVentas] = useState([]);
 
   const irADespachador = () => {
     navegar("/despachador");
@@ -39,22 +40,7 @@ function CierreCaja() {
   }
 
   async function cerrarCaja(productosVendidos){
-    const documento = new ExcelJS.Workbook();
-    const hoja = documento.addWorksheet("Ventas");
-
-    hoja.addRow(["Producto", "Precio Unitario", "Cantidad", "Precio Total"]);
-
-    Object.entries(productosVendidos).forEach(([id, productoVendido]) => {
-      hoja.addRow([productoVendido[0], productoVendido[1], productoVendido[2], productoVendido[1] * productoVendido[2]]);
-    })
-
-    hoja.addRow(["Total", "", "", calcularTotal(productosVendidos)]);
-
-    const convertidor = await documento.xlsx.writeBuffer();
-    saveAs(new Blob([convertidor]), "archivo.xlsx");
-
     let productosJson = [];
-
     Object.entries(productosVendidos).forEach(([idp, p]) => {
       productosJson.push({
         id: idp,
@@ -64,24 +50,45 @@ function CierreCaja() {
       })
     })
 
-    fetch("http://localhost:8080/api/ventas_diarias", 
+    if (Object.keys(productosVendidos).length > 0){
+      const documento = new ExcelJS.Workbook();
+      const hoja = documento.addWorksheet("Ventas");
+
+      hoja.addRow(["Producto", "Precio Unitario", "Cantidad", "Precio Total"]);
+
+      Object.entries(productosVendidos).forEach(([id, productoVendido]) => {
+        hoja.addRow([productoVendido[0], productoVendido[1], productoVendido[2], productoVendido[1] * productoVendido[2]]);
+      })
+
+      hoja.addRow(["Total", "", "", calcularTotal(productosVendidos)]);
+
+      const convertidor = await documento.xlsx.writeBuffer();
+      const fecha = new Date().toLocaleDateString().replace(/\//g, "-");
+      saveAs(new Blob([convertidor]), `Ventas ${fecha}.xlsx`);
+
+      fetch("http://localhost:8080/api/ventas_diarias", 
       { 
       method: "POST",
       headers: { "Content-Type" : "application/json"},
       body: JSON.stringify({
         "productosVendidos": productosJson,
+        "total": calcularTotal(productosVendidos)
       })
-    })
-      .then(irADespachador())
+      })
       .catch(error => console.error("Error al obtener pedidos:", error));
-    
-    const borrar = await fetch("http://localhost:8080/api/pedidos/eliminar_todo", {
-      method : "DELETE"
-    })
 
-    if (!borrar.ok) {
-      throw new Error("Error al cerrar caja")
+      const borrar = await fetch("http://localhost:8080/api/pedidos/eliminar_todo", {
+        method : "DELETE"
+      })
+
+      if (!borrar.ok) {
+        throw new Error("Error al cerrar caja")
+      }
+
+    } else {
+      alert("No se puede cerrar caja, porque no hay ventas actualmente")
     }
+    irADespachador();
   }
   
   useEffect(() => {
@@ -92,6 +99,15 @@ function CierreCaja() {
       .then(data => setPedidos(data))
       .catch(error => console.error("Error al obtener pedidos:", error));
     }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/ventas_diarias", {
+      method: "GET"
+    })
+    .then(res => res.json())
+    .then(data => setVentas(data))
+    .catch(error => console.error("Error al cargar histórico de ventas:", error))
+  }, [])
 
 
   return (
@@ -110,7 +126,7 @@ function CierreCaja() {
             </button>
           </div>
 
-          {Array.isArray(pedidos) && pedidos.length > 0 ? (
+          {Array.isArray(pedidos) && Object.keys(productosVendidos(pedidos)).length > 0 ? (
             <div className="overflow-x-auto bg-white rounded-lg shadow">
                 <table className="min-w-full divide-y divide-gray-100">
                   <thead className="bg-gray-100">
@@ -142,7 +158,27 @@ function CierreCaja() {
               </table>
             </div>
           ) : (
-            <p className="text-gray-600 text-center text-lg">No se pudo cargar la lista de pedidos.</p>
+            <p className="text-gray-600 text-center text-lg">No hay ventas hasta el momento</p>
+          )}
+          <br></br>
+
+          {Array.isArray(ventas) && ventas.length > 0 ? (
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {ventas.map((venta) => (
+                <li key={venta.id} className="bg-white rounded-lg p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-md hover:shadow-lg transition transform hover:-translate-y-1">
+                  <div className="flex-1">
+                    <h2 className="text-xl font-bold text-gray-900">{venta.fecha}</h2>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <span className="inline-block bg-[#c41e3a] text-white font-semibold px-4 py-2 rounded-full">${venta.total}</span>
+                    <button onClick={() => verDetalle(venta.id)} className="text-sm border border-gray-300 text-gray-900 px-3 py-1 rounded hover:bg-gray-100 transition">Ver</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-600 text-center text-lg">No hay ventas hasta el momento</p>
           )}
         </div>
       </main>
