@@ -264,7 +264,7 @@ function Despachador() {
               <button
                 onClick={irACierreCaja}
                 className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
-                Cerrar Caja
+                Cierre de Caja
               </button>
               <button
                 onClick={irAProductos}

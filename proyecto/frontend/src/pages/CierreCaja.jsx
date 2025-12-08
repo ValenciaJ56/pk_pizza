@@ -11,11 +11,13 @@ function CierreCaja() {
     let productosVendidos = {}
     pedidos.forEach(pedido => {
         pedido.items.forEach(item => {
+          if (pedido.estado == "listo"){
             if (item.producto.id in productosVendidos){
                 productosVendidos[item.producto.id][2] += item.cantidad
             }else{
                 productosVendidos[item.producto.id] = [item.producto.nombre, item.producto.precio, item.cantidad]
             }
+          }
         })
     });
     return productosVendidos
@@ -27,6 +29,23 @@ function CierreCaja() {
         total += (producto[1] * producto[2])
     })
     return total
+  }
+
+  function cerrarCaja(){
+    console.log("aqui")
+    {/*fetch(`http://localhost:8080/api/pedidos/${pedido.id}`, { 
+      method: "POST",
+      headers: { "Content-Type" : "application/json"},
+      body: JSON.stringify({
+        estado: pedido.estado,
+        items: pedido.items
+      })
+    })
+      .then(() => {
+        setPedidos(prev =>
+          prev.map(p => (p.id === pedido.id ? {...p, items: pedido.items}: p))
+        )})
+      .catch(error => console.error("Error al obtener pedidos:", error));*/}
   }
   
   useEffect(() => {
@@ -48,6 +67,11 @@ function CierreCaja() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-4xl font-bold text-gray-900">Cierre de caja</h1>
+            <button
+              onClick={()=> cerrarCaja()}
+              className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
+              Cerrar Caja
+            </button>
           </div>
 
           {Array.isArray(pedidos) && pedidos.length > 0 ? (
