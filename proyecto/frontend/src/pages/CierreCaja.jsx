@@ -10,6 +10,8 @@ function CierreCaja() {
   const navegar = useNavigate();
   const [pedidos, setPedidos] = useState([]);
   const [ventas, setVentas] = useState([]);
+  const [ventanaEmergente, setVentana] = useState(false);
+  const [ventaActual, setVentaActual] = useState(null);
 
   const irADespachador = () => {
     navegar("/despachador");
@@ -109,6 +111,16 @@ function CierreCaja() {
     .catch(error => console.error("Error al cargar histórico de ventas:", error))
   }, [])
 
+  const abrirVentana = (venta) => {
+    const copy = JSON.parse(JSON.stringify(venta))
+    setVentana(true);
+    setVentaActual(copy);
+    console.log(copy)
+  }
+
+  const cerrarVentana = () => {
+    setVentana(false);
+  }
 
   return (
     <>
@@ -158,8 +170,11 @@ function CierreCaja() {
               </table>
             </div>
           ) : (
-            <p className="text-gray-600 text-center text-lg">No hay ventas hasta el momento</p>
+            <p className="text-gray-600 text-center text-lg">No hay ventas hasta el momento en este día</p>
           )}
+
+          <br></br>
+          <h1 className="text-4xl font-bold text-gray-900">Histórico de Ventas</h1>
           <br></br>
 
           {Array.isArray(ventas) && ventas.length > 0 ? (
@@ -172,7 +187,7 @@ function CierreCaja() {
 
                   <div className="flex items-center gap-4">
                     <span className="inline-block bg-[#c41e3a] text-white font-semibold px-4 py-2 rounded-full">${venta.total}</span>
-                    <button onClick={() => verDetalle(venta.id)} className="text-sm border border-gray-300 text-gray-900 px-3 py-1 rounded hover:bg-gray-100 transition">Ver</button>
+                    <button onClick={() => abrirVentana(venta)} className="text-sm border border-gray-300 text-gray-900 px-3 py-1 rounded hover:bg-gray-100 transition">Ver</button>
                   </div>
                 </li>
               ))}
@@ -181,6 +196,43 @@ function CierreCaja() {
             <p className="text-gray-600 text-center text-lg">No hay ventas hasta el momento</p>
           )}
         </div>
+
+        {ventanaEmergente && ventaActual && (
+          <div className="fixed inset-0 z-40 flex items-center justify-center">
+            <div className="absolute inset-0 bg-black/40" onClick={cerrarVentana}></div>
+            <div className="bg-white rounded-lg w-full max-w-3xl p-10 z-10 shadow-lg overflow-y-auto max-h-[80vh]">
+              <h3 className="text-xl font-bold mb-4">Ventas del día {ventaActual.fecha}</h3>
+              <table className="w-full table-auto border-collapse">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Producto</th>
+                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-600 uppercase tracking-wider">Precio Unitario</th>
+                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-600 uppercase tracking-wider">Cantidad Vendida</th>
+                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-600 uppercase tracking-wider">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-100">
+                  {ventaActual.productosVendidos.map(p => {
+                    return (
+                      <tr key={p.id} className="hover:bg-gray-50">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{p.nombre}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-right">$ {p.precio}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-right"> {p.cantidad}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-right">$ {p.precio * p.cantidad}</td>
+                      </tr>
+                    )
+                  })}
+                    <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Total</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-right"></td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-right"></td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-right">$ {ventaActual.total}</td>
+                    </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      )}
       </main>
     </>
   );
