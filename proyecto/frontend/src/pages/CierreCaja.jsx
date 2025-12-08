@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import menuImage from "../assets/MenuWide.jpg";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import ExcelJS from "exceljs";
+import {saveAs} from "file-saver";
 
 function CierreCaja() {
   const [pedidos, setPedidos] = useState([]);
@@ -31,7 +33,21 @@ function CierreCaja() {
     return total
   }
 
-  function cerrarCaja(){
+  async function cerrarCaja(productosVendidos){
+    const documento = new ExcelJS.Workbook();
+    const hoja = documento.addWorksheet("Ventas");
+
+    hoja.addRow(["Producto", "Precio Unitario", "Cantidad", "Precio Total"]);
+
+    Object.entries(productosVendidos).forEach(([id, productoVendido]) => {
+      hoja.addRow([productoVendido[0], productoVendido[1], productoVendido[2], productoVendido[1] * productoVendido[2]]);
+    })
+
+    hoja.addRow(["Total", "", "", calcularTotal(productosVendidos)]);
+
+    const convertidor = await documento.xlsx.writeBuffer();
+    saveAs(new Blob([convertidor]), "archivo.xlsx");
+
     console.log("aqui")
     {/*fetch(`http://localhost:8080/api/pedidos/${pedido.id}`, { 
       method: "POST",
@@ -68,7 +84,7 @@ function CierreCaja() {
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-4xl font-bold text-gray-900">Cierre de caja</h1>
             <button
-              onClick={()=> cerrarCaja()}
+              onClick={()=> cerrarCaja(productosVendidos(pedidos))}
               className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
               Cerrar Caja
             </button>

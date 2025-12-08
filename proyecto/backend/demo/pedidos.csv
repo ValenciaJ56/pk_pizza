@@ -10,4 +10,4 @@
 {"id":14,"items":[{"producto":{"id":18,"nombre":" 4 Quesos Personal","precio":35000},"cantidad":4,"observacion":""}],"estado":"listo"}
 {"id":15,"items":[{"producto":{"id":22,"nombre":" Adicion Borde de Queso","precio":5000},"cantidad":1,"observacion":""}],"estado":"listo"}
 {"id":16,"items":[{"producto":{"id":1,"nombre":" Picoso PK Mediana","precio":50000},"cantidad":1,"observacion":""},{"producto":{"id":10,"nombre":" Carnes Mixtas Personal","precio":38000},"cantidad":1,"observacion":""},{"producto":{"id":14,"nombre":" Margarita Personal","precio":30000},"cantidad":1,"observacion":""}],"estado":"listo"}
-{"id":17,"items":[{"producto":{"id":32,"nombre":"Botella de Agua","precio":2500},"cantidad":1,"observacion":""},{"producto":{"id":30,"nombre":"Hamburguesa","precio":10000},"cantidad":1,"observacion":""}],"estado":"espera"}
+{"id":17,"items":[{"producto":{"id":32,"nombre":"Botella de Agua","precio":2500},"cantidad":1,"observacion":""},{"producto":{"id":30,"nombre":"Hamburguesa","precio":10000},"cantidad":1,"observacion":""}],"estado":"listo"}
