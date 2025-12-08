@@ -7,7 +7,12 @@ import ExcelJS from "exceljs";
 import {saveAs} from "file-saver";
 
 function CierreCaja() {
+  const navegar = useNavigate();
   const [pedidos, setPedidos] = useState([]);
+
+  const irADespachador = () => {
+    navegar("/despachador");
+  };
 
   function productosVendidos(pedidos){
     let productosVendidos = {}
@@ -48,20 +53,35 @@ function CierreCaja() {
     const convertidor = await documento.xlsx.writeBuffer();
     saveAs(new Blob([convertidor]), "archivo.xlsx");
 
-    console.log("aqui")
-    {/*fetch(`http://localhost:8080/api/pedidos/${pedido.id}`, { 
+    let productosJson = [];
+
+    Object.entries(productosVendidos).forEach(([idp, p]) => {
+      productosJson.push({
+        id: idp,
+        nombre: p[0],
+        precio: p[1],
+        cantidad: p[2]
+      })
+    })
+
+    fetch("http://localhost:8080/api/ventas_diarias", 
+      { 
       method: "POST",
       headers: { "Content-Type" : "application/json"},
       body: JSON.stringify({
-        estado: pedido.estado,
-        items: pedido.items
+        "productosVendidos": productosJson,
       })
     })
-      .then(() => {
-        setPedidos(prev =>
-          prev.map(p => (p.id === pedido.id ? {...p, items: pedido.items}: p))
-        )})
-      .catch(error => console.error("Error al obtener pedidos:", error));*/}
+      .then(irADespachador())
+      .catch(error => console.error("Error al obtener pedidos:", error));
+    
+    const borrar = await fetch("http://localhost:8080/api/pedidos/eliminar_todo", {
+      method : "DELETE"
+    })
+
+    if (!borrar.ok) {
+      throw new Error("Error al cerrar caja")
+    }
   }
   
   useEffect(() => {

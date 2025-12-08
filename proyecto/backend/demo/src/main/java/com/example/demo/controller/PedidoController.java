@@ -46,4 +46,9 @@ public class PedidoController {
         service.eliminarPedido(id);
         return "Producto eliminado";
     }
+
+    @DeleteMapping("/eliminar_todo")
+    public void eliminarTodo() throws Exception {
+        service.eliminarTodo();
+    }
 }
