@@ -52,6 +52,9 @@ function CierreCaja() {
       })
     })
 
+    if (Object.keys(productosVendidos).length != pedidos.length){
+      alert("No se puede cerrar caja, porque hay pedidos sin finalizar")
+    }else{
     if (Object.keys(productosVendidos).length > 0){
       const documento = new ExcelJS.Workbook();
       const hoja = documento.addWorksheet("Ventas");
@@ -86,11 +89,11 @@ function CierreCaja() {
       if (!borrar.ok) {
         throw new Error("Error al cerrar caja")
       }
+      irADespachador();
 
     } else {
       alert("No se puede cerrar caja, porque no hay ventas actualmente")
-    }
-    irADespachador();
+    }}
   }
   
   useEffect(() => {
