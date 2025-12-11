@@ -413,7 +413,7 @@ function Despachador() {
                           <li key={item.id} className="py-3 flex items-center justify-between">
                             <div>
                               <div className="font-semibold text-gray-900">{item.nombre} <span className="text-sm text-gray-600">x{item.cantidad}</span></div>
-                              <div className="text-sm text-gray-600">Tamaño: {item.tamano} — {item.observaciones}</div>
+                              <div className="text-sm text-gray-600">{item.observaciones}</div>
                             </div>
                             <div className="flex items-center gap-3">
                               <div className="text-gray-900 font-medium">${(item.precioUnitario * item.cantidad).toFixed(2)}</div>

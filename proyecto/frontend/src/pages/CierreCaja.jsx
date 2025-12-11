@@ -52,7 +52,14 @@ function CierreCaja() {
       })
     })
 
-    if (Object.keys(productosVendidos).length != pedidos.length){
+    let cantidadPedidosListos = 0
+    pedidos.forEach(p => {
+      if (p.estado == "listo"){
+        cantidadPedidosListos += 1
+      }
+    })
+
+    if (cantidadPedidosListos != pedidos.length){
       alert("No se puede cerrar caja, porque hay pedidos sin finalizar")
     }else{
     if (Object.keys(productosVendidos).length > 0){
