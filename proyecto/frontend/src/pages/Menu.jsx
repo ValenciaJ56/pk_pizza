@@ -32,7 +32,7 @@ function Menu() {
                 <li key={producto.id} className="bg-white rounded-lg p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-md hover:shadow-lg transition transform hover:-translate-y-1">
                   <div className="flex-1">
                     <h2 className="text-xl font-bold text-gray-900">{producto.nombre}</h2>
-                    <p className="text-sm text-gray-600 mt-1">{producto.descripcion ? producto.descripcion : 'Deliciosa opción'}</p>
+                    {/*<p className="text-sm text-gray-600 mt-1">{producto.descripcion ? producto.descripcion : 'Deliciosa opción'}</p>*/}
                   </div>
 
                   <div className="flex items-center gap-4">

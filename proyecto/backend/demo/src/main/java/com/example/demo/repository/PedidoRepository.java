@@ -84,4 +84,10 @@ public class PedidoRepository {
         }
         return max + 1;
     }
+
+    public void eliminarTodo() throws IOException{
+        FileWriter fw = new FileWriter(archivo, false);
+        fw.write("");
+        fw.close();
+    }
 }

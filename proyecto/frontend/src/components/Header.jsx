@@ -21,16 +21,16 @@ const Header = () => {
                 Menú
               </a>
             </li>
-            <li>
-              <a href="/contacto" className="text-white text-lg font-medium hover:text-[#c41e3a]">
+            {/*<li>
+              <a href="" className="text-white text-lg font-medium hover:text-[#c41e3a]">
                 Contacto
               </a>
             </li>
             <li>
-              <a href="/otro" className="text-white text-lg font-medium hover:text-[#c41e3a]">
+              <a href="" className="text-white text-lg font-medium hover:text-[#c41e3a]">
                 Enlace
               </a>
-            </li>
+            </li>*/}
           </ul>
         </nav>
       </div>

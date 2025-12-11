@@ -30,4 +30,8 @@ public class PedidoService {
     public void eliminarPedido(int id) throws IOException {
         repo.eliminar(id);
     }
+
+    public void eliminarTodo() throws IOException {
+        repo.eliminarTodo();
+    }
 }

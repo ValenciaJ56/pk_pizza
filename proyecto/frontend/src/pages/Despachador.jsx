@@ -41,6 +41,14 @@ function Despachador() {
     navegar("/productos");
   };
 
+  const irAPedidos = () => {
+    navegar("/pedidos");
+  };
+
+  const irACierreCaja = () => {
+    navegar("/cierre");
+  };
+
   const handleAdd = () => {
     const prod = productos.find((p) => String(p.id) === String(selectedId));
     if (!prod) return;
@@ -98,6 +106,24 @@ function Despachador() {
     setModalOrder(null)
   }
 
+  function modificarPedido(pedido){
+    fetch(`http://localhost:8080/api/pedidos/${pedido.id}`, { 
+      method: "PUT",
+      headers: { "Content-Type" : "application/json"},
+      body: JSON.stringify({
+        estado: pedido.estado,
+        items: pedido.items
+      })
+    })
+      .then(() => {
+        setPedidos(prev =>
+          prev.map(p => (p.id === pedido.id ? {...p, items: pedido.items}: p))
+        )})
+      .catch(error => console.error("Error al obtener pedidos:", error));
+    setModalOpen(false)
+    setModalOrder(null)
+  }
+
   const updateModalOrderField = (field, value) => {
     setModalOrder(prev => ({ ...prev, [field]: value }))
   }
@@ -118,7 +144,7 @@ function Despachador() {
       })
     }))
   }
-  const confirmarOrden = async (order) => {
+  const confirmarOrden = async (order, pedidos) => {
     // Validar que la orden tenga items
     if (!order.items || order.items.length === 0) {
       alert("No puedes confirmar una orden sin productos");
@@ -131,6 +157,7 @@ function Despachador() {
         nombre: item.nombre,
         precio: item.precioUnitario
       },
+      estado: item.estado,
       cantidad: item.cantidad,
       observacion: item.observaciones || ""
     }));
@@ -151,10 +178,13 @@ function Despachador() {
       
       setOrders(prev => prev.map(o => o.id === order.id ? { ...o, confirmed: true, confirmedAt: Date.now(), startedAt: Date.now() } : o));
       if (activeOrderId === order.id) setActiveOrderId(null);
+
     } catch (err) {
       console.error("Error al confirmar orden en backend:", err);
       alert("Error al confirmar la orden");
     }
+
+    {pedidosGuardados(pedidos)}
   }
 
   
@@ -175,12 +205,14 @@ function Despachador() {
   };
 
   function pedidosGuardados(pedidos){
+    const pedidosFiltrados = pedidos.filter(pedido => pedido.estado !== "listo");
+
     return (
       <>
-        {pedidos.map(pedido => (
+        {pedidosFiltrados.map(pedido => (
           <div key={pedido.id} className={`bg-white rounded-lg p-4 ${activeOrderId === pedido.id ? 'ring-2 ring-red-600' : ''}`}>
             <div className="flex items-center justify-between mb-3">
-              <div className="font-bold text-black">Orden #{pedido.id}</div>
+              <div className="font-bold text-black">Orden #{pedido.id} ({pedido.estado == "espera" ? 'En espera' : 'En preparación'})</div>
               <div className="flex items-center gap-2">
                 {/*<button onClick={() => setActiveOrderId(o.id)} className="text-sm font-bold px-6 py-1.5 bg-[#edefd6] rounded border">Factura</button>*/}
                 <button onClick={() => eliminarPedido(pedido.id)} className="text-sm font-bold px-6 py-1.5 bg-red-600 text-white rounded">Eliminar orden</button>
@@ -202,11 +234,11 @@ function Despachador() {
               {pedido.items.map(item => (
                 <li key={item.producto.id} className="py-3 flex items-center justify-between">
                   <div>
-                    <div className="font-semibold text-gray-900">{item.producto.nombre} <span className="text-sm text-gray-600">x{item.cantidad}</span></div>
+                    <div className="font-semibold text-gray-900">{item.producto.nombre} <span className="text-sm text-gray-600">x {item.cantidad}</span></div>
                       {/*<div className="text-sm text-gray-600">Tamaño: {item.tamano} — {item.observaciones}</div>*/}
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="text-gray-900 font-medium">${(item.producto.precio * item.cantidad).toFixed(2)}</div>
+                      <div className="text-gray-900 font-medium">$ {(item.producto.precio * item.cantidad).toFixed(2)}</div>
                     </div>
                 </li>
               ))}
@@ -228,12 +260,23 @@ function Despachador() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold">Despachador</h2>
-            <button
-              onClick={irAProductos}
-              className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md"
-            >
-              Ver Productos
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={irACierreCaja}
+                className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
+                Cierre de Caja
+              </button>
+              <button
+                onClick={irAProductos}
+                className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
+                Ver Productos
+              </button>
+              <button
+                onClick={irAPedidos}
+                className="bg-[#c41e3a] hover:bg-red-800 text-white font-semibold px-4 py-2 rounded shadow-md">
+                Ver Pedidos
+              </button>
+            </div>
           </div>
           <div className="bg-white rounded-lg p-6 shadow-2xl">
             <div className="flex items-center justify-between mb-4">
@@ -338,7 +381,7 @@ function Despachador() {
           </div>
 
           <section className="mt-6">
-            <h3 className="text-xl text-black font-bold mb-3">Órdenes</h3>
+            <h3 className="text-xl text-black font-bold mb-3">Órdenes Pendientes</h3>
 
             {orders.length === 0 && pedidos.length === 0 ? (
               <p className="text-black font-bold ">No hay órdenes creadas</p>
@@ -350,7 +393,9 @@ function Despachador() {
                       <div className="font-bold text-black">Orden Nueva</div>
                       <div className="flex items-center gap-2">
                         <button
-                            onClick={() => confirmarOrden(o)}
+                            onClick={() => { 
+                              confirmarOrden(o, pedidos)
+                              pedidosGuardados(pedidos)}}
                             disabled={o.confirmed}
                             
                             className={`text-sm font-bold px-6 py-1.5 rounded ${o.confirmed ? 'bg-gray-300 text-gray-700 cursor-default' : 'bg-green-600 text-white'}`}
@@ -360,7 +405,6 @@ function Despachador() {
                           </button>
                       </div>
                       {/* Temporizador dentro del recuadro de la orden, debajo de los botones */}
-                      <OrderTimer startedAt={o.startedAt} orderId={o.id} />
                     </div>
 
                     {o.items && o.items.length > 0 ? (
@@ -426,7 +470,7 @@ function Despachador() {
 
                 <div className="flex justify-end gap-3">
                   <button onClick={closeModal} className="px-4 py-2 bg-gray-100 rounded border">Cancelar</button>
-                  <button onClick={saveModal} className="px-4 py-2 bg-[#c41e3a] text-white rounded">Guardar cambios</button>
+                  <button onClick={() => modificarPedido(modalOrder)} className="px-4 py-2 bg-[#c41e3a] text-white rounded">Guardar cambios</button>
                 </div>
               </div>
             </div>

@@ -8,6 +8,11 @@ import { BrowserRouter, Routes, Route} from "react-router-dom"
 import fondogrande from "./assets/fondogrande.jpg";
 import Productos from "./pages/Productos"
 import PedidosDashboard from "./components/PedidosDashboard"
+import Pedidos from "./pages/Pedidos"
+import CierreCaja from "./pages/CierreCaja"
+
+console.log(window.location.pathname);
+
 function App() {
   return (
     <BrowserRouter>
@@ -32,7 +37,8 @@ function App() {
                 <Route path="/chef" element={<Chef />} />
                 <Route path="/despachador" element={<Despachador />} />
                 <Route path="/productos" element={<Productos />} />
-                <Route path="/pedidos" element={<PedidosDashboard />} />
+                <Route path="/pedidos" element={<Pedidos />} />
+                <Route path="/cierre" element={<CierreCaja />} />
 
                 <Route path="*" element={<Error />} />
               </Routes>
