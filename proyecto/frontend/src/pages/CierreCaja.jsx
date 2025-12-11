@@ -52,17 +52,8 @@ function CierreCaja() {
       })
     })
 
-    let cantidadPedidosListos = 0;
-    pedidos.forEach(p => {
-      if (p.estado == "listo"){
-        cantidadPedidosListos += 1;
-      }
-    })
-
-    if (cantidadPedidosListos != pedidos.length){
+    if (Object.keys(productosVendidos).length != pedidos.length){
       alert("No se puede cerrar caja, porque hay pedidos sin finalizar")
-      console.log(Object.keys(productosVendidos).length)
-      console.log( pedidos.length)
     }else{
     if (Object.keys(productosVendidos).length > 0){
       const documento = new ExcelJS.Workbook();
