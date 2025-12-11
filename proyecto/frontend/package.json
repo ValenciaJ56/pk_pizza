@@ -24,7 +24,10 @@
     "vite": "^7.2.2"
   },
   "dependencies": {
+<<<<<<< HEAD
+=======
     "exceljs": "^4.4.0",
+>>>>>>> 0258d7c6ab8a9c8cd60c63c90455ebc8f8bf652d
     "file-saver": "^2.0.5",
     "jspdf": "^3.0.4",
     "lucide-react": "^0.554.0",
